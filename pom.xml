@@ -9,11 +9,11 @@
 		<version>3.2.3</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>ComIA</artifactId>
+	<groupId>com.universidadeuropea</groupId>
+	<artifactId>comia</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ComIA</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Universidad Europea Final Spring Boot proyect</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -38,11 +38,13 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

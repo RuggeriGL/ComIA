@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.universidadeuropea.comia;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
