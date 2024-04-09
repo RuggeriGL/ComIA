@@ -1,30 +1,26 @@
-<div class="container">
-    <form  (ngSubmit)="onSubmit()">
-      <div>
-        <label for="username">Username</label>
-        <input type="text" id="username" formControlName="username">
-        <div *ngIf="registroForm.get('username')?.invalid && registroForm.get('username')?.touched">
-          Nombre de usuario es requerido y debe tener al menos 4 caracteres.
-        </div>
+<div id="registerBody">
+  <div class="container-fluid justify-content-center d-flex w-100 ">
+      <div class="col-md-4">
+          <form (ngSubmit)="OnSubmitRegister()" #registerForm="ngForm">
+              <h2 class="text-center" style="margin: 35px;">Registrarse</h2>
+              <div class="form-outline mb-4">
+                  <label class="form-label" for="username">Usuario</label>
+                  <input class="form-control" type="text" id="username" name="username" [(ngModel)]="username" required>
+              </div>
+              <div class="form-outline mb-4">
+                  <label class="form-label" for="email">Correo Electrónico</label>
+                  <input class="form-control" type="email" id="email" name="email" [(ngModel)]="email" required>
+              </div>
+              <div class="form-outline mb-4">
+                  <label class="form-label" for="registerPassword">Contraseña</label>
+                  <input class="form-control" type="password" id="registerPassword" name="password" [(ngModel)]="password" required>
+              </div>
+              <div class="form-outline mb-4">
+                  <label class="form-label" for="confirmPassword">Confirmar Contraseña</label>
+                  <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword" required>
+              </div>
+              <button class="btn btn-primary btn-block mb-4 align-self-center" type="submit">Registrarse</button>
+          </form>
       </div>
-  
-      <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" formControlName="email">
-        <div *ngIf="registroForm.get('email')?.invalid && registroForm.get('email')?.touched">
-          Debes introducir un email válido.
-        </div>
-      </div>
-  
-      <div>
-        <label for="password">Password</label>
-        <input type="password" id="password" formControlName="password">
-        <div *ngIf="registroForm.get('password')?.invalid && registroForm.get('password')?.touched">
-          La contraseña es requerida y debe tener al menos 6 caracteres.
-        </div>
-      </div>
-  
-      <button type="submit" [disabled]="registroForm.invalid">Registrarse</button>
-    </form>
   </div>
-  
+</div>

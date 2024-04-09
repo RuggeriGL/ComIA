@@ -1,30 +1,34 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
 
-  registroForm: FormGroup;
+  @Output() onSubmitRegisterEvent = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder) {
-    this.registroForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.minLength(4)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
-  }
+  username: string = "";
+  email: string = "";
+  password: string = "";
+  confirmPassword: string = "";
 
-  onSubmit() {
-    if (this.registroForm.valid) {
-      console.log('Formulario enviado', this.registroForm.value);
-      
+  OnSubmitRegister(): void {
+    // Aquí puedes agregar validaciones adicionales si es necesario
+    if (this.password === this.confirmPassword) {
+      this.onSubmitRegisterEvent.emit({
+        "username": this.username,
+        "email": this.email,
+        "password": this.password
+      });
+    } else {
+      // Manejar el error de contraseñas no coincidentes
+      console.error("Las contraseñas no coinciden");
     }
   }
 }
