@@ -6,9 +6,9 @@ public class AppException extends RuntimeException {
 
     private final HttpStatus httpStatus;
 
-    public AppException(String message, HttpStatus HttpStatus) {
+    public AppException(String message, HttpStatus http) {
         super("message");
-        this.httpStatus = httpStatus;
+        this.httpStatus = http;
     }
 
     public HttpStatus getHttpStatus() {

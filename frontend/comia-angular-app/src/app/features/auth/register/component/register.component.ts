@@ -13,7 +13,8 @@ export class RegisterComponent {
 
   @Output() onSubmitRegisterEvent = new EventEmitter();
 
-  username: string = "";
+  firstName: string = "";
+  lastName: string = "";
   email: string = "";
   password: string = "";
   confirmPassword: string = "";
@@ -22,9 +23,11 @@ export class RegisterComponent {
     // Aquí puedes agregar validaciones adicionales si es necesario
     if (this.password === this.confirmPassword) {
       this.onSubmitRegisterEvent.emit({
-        "username": this.username,
+        "firstname": this.firstName,
+        "lastname": this.lastName,
         "email": this.email,
-        "password": this.password
+        "password": this.password,
+        "confirmpassword": this.confirmPassword
       });
     } else {
       // Manejar el error de contraseñas no coincidentes
