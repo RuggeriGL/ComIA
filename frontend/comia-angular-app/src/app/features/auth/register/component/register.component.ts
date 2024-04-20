@@ -1,37 +1,39 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, ValidationErrors } from '@angular/forms';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css']  // Corregido de 'styleUrl' a 'styleUrls'
 })
 export class RegisterComponent {
+  registerForm: FormGroup;
+  mismatch: any;
 
-  @Output() onSubmitRegisterEvent = new EventEmitter();
+  constructor(private fb: FormBuilder, private authService: AuthService) {
+    this.registerForm = this.fb.group({
+      firstName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required],
+    }, { validator: this.passwordMatchValidator });
+  }
 
-  firstName: string = "";
-  lastName: string = "";
-  email: string = "";
-  password: string = "";
-  confirmPassword: string = "";
+  passwordMatchValidator(form: FormGroup): ValidationErrors | null {
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+  
+    // Verifica si los valores son iguales
+    return password === confirmPassword ? null : { mismatch: true };
+  }
 
-  OnSubmitRegister(): void {
-    // Aquí puedes agregar validaciones adicionales si es necesario
-    if (this.password === this.confirmPassword) {
-      this.onSubmitRegisterEvent.emit({
-        "firstname": this.firstName,
-        "lastname": this.lastName,
-        "email": this.email,
-        "password": this.password,
-        "confirmpassword": this.confirmPassword
-      });
-    } else {
-      // Manejar el error de contraseñas no coincidentes
-      console.error("Las contraseñas no coinciden");
+  onSubmitRegister(): void {
+    if (this.registerForm.valid) {
+      this.authService.onRegister(this.registerForm.value);
     }
   }
 }

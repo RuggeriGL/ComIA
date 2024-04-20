@@ -1,32 +1,40 @@
 <div id="registerBody">
-  <div class="container-fluid justify-content-center d-flex w-100 ">
-      <div class="col-md-4">
-          <form (ngSubmit)="OnSubmitRegister()" #registerForm="ngForm">
-              <h2 class="text-center" style="margin: 35px;">Registrarse</h2>
-              <div class="form-outline mb-4">
-                  <label class="form-label" for="firstName">Nombre</label>
-                  <input class="form-control" type="text" id="firstName" name="firstName" [(ngModel)]="firstName" required>
-              </div>
-              <div class="form-outline mb-4">
-                <label class="form-label" for="lastName">Apellido</label>
-                <input class="form-control" type="text" id="lastName" name="lastName" [(ngModel)]="lastName">
-            </div>
-              <div class="form-outline mb-4">
-                  <label class="form-label" for="email">Correo Electrónico</label>
-                  <input class="form-control" type="email" id="email" name="email" [(ngModel)]="email" required>
-              </div>
-              <div class="form-outline mb-4">
-                  <label class="form-label" for="registerPassword">Contraseña</label>
-                  <input class="form-control" type="password" id="registerPassword" name="password" [(ngModel)]="password" required>
-              </div>
-              <div class="form-outline mb-4">
-                  <label class="form-label" for="confirmPassword">Confirmar Contraseña</label>
-                  <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="confirmPassword" required>
-              </div>
-              <div class="container-fluid d-flex justify-content-center">
-                  <button class="btn btn-block mb-4 btn-form-login px-4 py-2 mt-4 " type="submit"> Registrarse </button>
-              </div>
-          </form>
-      </div>
-  </div>
+    <div class="container-fluid justify-content-center d-flex w-75 ">
+        <div class="col-md-4">
+            <form (ngSubmit)="onSubmitRegister()" [formGroup]="registerForm">
+                <h2 class="text-center" style="margin: 35px;">Registrarse</h2>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="firstName">Nombre</label>
+                    <input class="form-control" type="text" id="firstName" name="firstName" formControlName="firstName"
+                        required>
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="lastName">Apellido</label>
+                    <input class="form-control" type="text" id="lastName" name="lastName" formControlName="lastName">
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="email">Correo Electrónico</label>
+                    <input class="form-control" type="email" id="email" name="email" formControlName="email" required>
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="registerPassword">Contraseña</label>
+                    <input class="form-control" type="password" id="registerPassword" name="password"
+                        formControlName="password" required>
+                </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="confirmPassword">Confirmar Contraseña</label>
+                    <input class="form-control" type="password" id="confirmPassword" name="confirmPassword"
+                        formControlName="confirmPassword" required>
+                </div>
+                <!-- Muestra un mensaje de error si las contraseñas no coinciden -->
+                <div *ngIf="registerForm.hasError('mismatch') && registerForm.get('password')?.touched && registerForm.get('confirmPassword')?.touched" class="alert alert-danger">
+                    Las contraseñas no coinciden
+                </div>
+                <div class="container-fluid d-flex justify-content-center">
+                    <button class="btn btn-block mb-4 btn-form-login px-4 py-2 mt-4" [disabled]="!registerForm.valid"
+                        type="submit"> Registrarse </button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
