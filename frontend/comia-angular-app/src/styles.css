@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+html, body {
+    height: 100%; /* Esto es importante para que el diseño de grid funcione correctamente */
+    margin: 0; /* Elimina el margen por defecto */
+    padding: 0; /* Elimina el padding por defecto */
+    background-color: rgba(255, 255, 255);
+}
+
+.app {
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* Header y footer con altura automática, contenido principal ocupando el espacio restante */
+    grid-template-areas: 
+        "header"
+        "main"
+        "footer";
+    min-height: 100vh; /* Asegura que el grid ocupe al menos la altura total de la ventana gráfica */
+}
+
+.app-header {
+    grid-area: header; /* Designa el área del grid para el header */
+}
+
+.main {
+    grid-area: main; /* Designa el área del grid para el contenido principal */
+}
+
+.app-footer {
+    grid-area: footer; /* Designa el área del grid para el footer */
+}
+  
