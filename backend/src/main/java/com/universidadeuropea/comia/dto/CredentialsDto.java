@@ -1,4 +1,4 @@
 package com.universidadeuropea.comia.dto;
 
-public record CredentialsDto(String email, char[] password) {
+public record CredentialsDto(String login, char[] password) {
 }

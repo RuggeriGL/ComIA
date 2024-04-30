@@ -26,8 +26,11 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String username;
+    @Column(nullable = true, name = "first_name")
+    private String firstName;
+
+    @Column(nullable = true, name = "last_name")
+    private String lastName;
 
     @Column(nullable = false)
     private String password;
@@ -35,7 +38,7 @@ public class Usuario {
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Boolean enabled;
 
     @Column(name = "fecha_creacion")
@@ -43,8 +46,5 @@ public class Usuario {
 
     @Column(name = "fecha_baja")
     private Date fechaBaja;
-
-    @Column(nullable = false)
-    private Character rol;
 
 }
