@@ -10,9 +10,9 @@ import com.universidadeuropea.comia.entity.Usuario;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    UserDto toUserDto(Usuario usuario);
+    UserDto toUserDto(Usuario user);
 
     @Mapping(target = "password", ignore = true)
     Usuario signUpToUser(SignUpDto signUpDto);
-    
+
 }

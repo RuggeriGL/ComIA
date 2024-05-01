@@ -13,6 +13,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterOutlet } from '@angular/router';
+import { ButtonsComponent } from './components/buttons/buttons.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RouterOutlet } from '@angular/router';
     WelcomeComponent,
     AuthContentComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ButtonsComponent
   ],
   imports: [
     BrowserModule,

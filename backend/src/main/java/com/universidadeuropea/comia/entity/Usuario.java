@@ -1,8 +1,6 @@
 package com.universidadeuropea.comia.entity;
 
 import java.util.Date;
-
-import jakarta.annotation.sql.DataSourceDefinition;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,7 +30,7 @@ public class Usuario {
     @Column(nullable = true, name = "last_name")
     private String lastName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "password")
     private String password;
 
     @Column(nullable = false)

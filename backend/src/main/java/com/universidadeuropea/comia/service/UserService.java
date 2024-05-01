@@ -27,7 +27,7 @@ public class UserService {
     private final UserMapper userMapper;
 
     public UserDto login(CredentialsDto credentialsDto) {
-        System.out.println("Email: "+credentialsDto.login());
+        //System.out.println("Email: "+credentialsDto.login());
         Usuario usuario = usuarioRepository.findByEmail(credentialsDto.login())
                 .orElseThrow(() -> new AppException("Email desconocido", HttpStatus.NOT_FOUND));
 

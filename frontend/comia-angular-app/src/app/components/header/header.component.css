@@ -1,0 +1,14 @@
+.fa-user {
+    color:#C6AA6B;
+}
+
+.nav-link {
+    color: #ffffff;
+    --border: #c6ab6b83  solid 2px;
+    --border-radius: 10px 10px;
+}
+
+.nav-link:hover {
+    color: #C6AA6B;
+}
+
