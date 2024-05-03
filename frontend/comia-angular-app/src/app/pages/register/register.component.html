@@ -45,7 +45,8 @@
                     <button class="btn btn-block mb-4 btn-form-login px-4 py-2 mt-4" [disabled]="!registerForm.valid"
                     type="submit"> Registrarse </button>
                 </div>
-                <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+                <div *ngIf="httpMessage?.status===400" class="alert alert-danger text-center">{{ httpMessage?.message }}</div>
+                <div *ngIf="httpMessage?.status===201" class="alert alert-success text-center">{{ httpMessage?.message+" " }}<a href="/login">iniciar sesión</a></div>
             </form>
         </div>
     </div>

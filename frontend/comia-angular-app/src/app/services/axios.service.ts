@@ -10,17 +10,19 @@ export class AxiosService {
     axios.defaults.headers.post["Content-Type"]= "application/json";
   }
 
-  request(method: string, url: string, data: any): Promise<any>{
+  request(method: string, url: string, data?: any): Promise<any>{
     let headers = {}
 
-    if (this.getAuthToken() !== null){
-      headers = {"Authorization": "Bearer" + this.getAuthToken()};
+    const token = this.getAuthToken();
+    if (token){
+      headers = {"Authorization": `Bearer ${token}`};
     }
 
     return axios({
       method: method,
       url: url,
-      data: data
+      data: data,
+      headers: headers
     });
   }
 

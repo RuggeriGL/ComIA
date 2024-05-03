@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { ErrorMessagesService } from '../../services/error-messages.service';
+import { httpMessagesService } from '../../services/http-messages.service';
+import { Message } from '../../model/Message';
 
 @Component({
   selector: 'app-register',
@@ -10,9 +11,9 @@ import { ErrorMessagesService } from '../../services/error-messages.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  errorMessage: string = "";
+  httpMessage: Message | undefined;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private errorMessagesService: ErrorMessagesService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private httpMessagesService: httpMessagesService) {
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: [''],
@@ -23,8 +24,11 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.errorMessagesService.currentMessage.subscribe(message => {
-      this.errorMessage = message;
+    this.httpMessagesService.currentMessage.subscribe(message => {
+      this.httpMessage = message;
+      if(message.status===201){
+        this.registerForm.reset();
+      }
     });
   }
 
@@ -41,9 +45,6 @@ export class RegisterComponent implements OnInit {
   onSubmitRegister(): void {
     if (this.registerForm.valid) {
       this.authService.onRegister(this.registerForm.value);
-    } else {
-      this.errorMessagesService.changeMessage("Please correct the errors in the form.");
-      this.registerForm.markAllAsTouched();
-    }
+    } 
   }
 }

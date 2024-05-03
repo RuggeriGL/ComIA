@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ErrorMessagesService } from './error-messages.service';
+import { HttpMessagesService } from './http-messages.service';
 
-describe('ErrorMessagesService', () => {
-  let service: ErrorMessagesService;
+describe('HttpMessagesService', () => {
+  let service: HttpMessagesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ErrorMessagesService);
+    service = TestBed.inject(HttpMessagesService);
   });
 
   it('should be created', () => {
