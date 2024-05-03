@@ -11,10 +11,29 @@ export class AxiosService {
   }
 
   request(method: string, url: string, data: any): Promise<any>{
+    let headers = {}
+
+    if (this.getAuthToken() !== null){
+      headers = {"Authorization": "Bearer" + this.getAuthToken()};
+    }
+
     return axios({
       method: method,
       url: url,
       data: data
     });
   }
+
+  getAuthToken(): string | null {
+    return window.localStorage.getItem("auth-token");
+  }
+
+  setAuthToken(authToken: string) {
+    if(authToken !== null){
+      window.localStorage.setItem('auth-token', authToken);
+    } else {
+      window.localStorage.removeItem('auth-token');
+    }
+  }
+
 }
