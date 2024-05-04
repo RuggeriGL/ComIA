@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
-import { httpMessagesService } from '../../services/http-messages.service';
+import { HttpMessagesService } from '../../services/http-messages.service';
 import { Message } from '../../model/Message';
 
 @Component({
@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   httpMessage: Message | undefined;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private httpMessagesService: httpMessagesService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private httpMessagesService: HttpMessagesService) {
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: [''],

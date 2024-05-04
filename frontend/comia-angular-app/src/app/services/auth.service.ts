@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AxiosService } from './axios.service';
-import { httpMessagesService } from './http-messages.service';
+import { HttpMessagesService } from './http-messages.service';
 import { Message } from '../model/Message';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +11,11 @@ import { Message } from '../model/Message';
 export class AuthService {
 
   private componentToShow: string = "";
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
 
-  constructor( private axiosService : AxiosService, private httpMessagesService : httpMessagesService ){ }
+  constructor( private axiosService : AxiosService , private httpMessagesService : HttpMessagesService ){ }
+
+
 
   onLogin(input : any){
     this.axiosService.request(
@@ -27,13 +32,6 @@ export class AuthService {
         this.handleHttpOk({
           status:response.status,
           message:"Usuario logeado"
-        })
-      }
-    }).catch(error=>{
-      if(error.response.status===400 || error.response.status===404){
-        this.handleHttpError({
-          status: error.response.status,
-          message: error.response.data.message
         })
       }
     });
@@ -58,23 +56,22 @@ export class AuthService {
       }
       this.axiosService.setAuthToken(response.data.token);
       this.componentToShow = "messages";
-    }).catch(error => {
-      if (error.response.status === 400){
-        this.handleHttpError({
-          status: error.response.status, 
-          message: error.response.data.message
-        });
-      }
     });
   }
 
-  private handleHttpError(message: Message) {
-    this.httpMessagesService.clear();
-    this.httpMessagesService.changeMessage(message);
-  } 
 
   private handleHttpOk(message: Message){
     this.httpMessagesService.clear();
     this.httpMessagesService.changeMessage(message);
   }
+
+  logout(){
+    this.axiosService.logout();
+  }
+
+  // Método para obtener un Observable del estado de autenticación
+  isAuthenticated(): Observable<boolean | null> {
+    return this.axiosService.getLoggedIn();
+  }
+
 }

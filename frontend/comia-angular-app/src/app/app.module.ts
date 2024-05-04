@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterOutlet } from '@angular/router';
 import { ButtonsComponent } from './components/buttons/buttons.component';
+import { ForbiddenErrorComponent } from './components/errors/forbidden-error/forbidden-error.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ButtonsComponent } from './components/buttons/buttons.component';
     AuthContentComponent,
     LoginComponent,
     RegisterComponent,
-    ButtonsComponent
+    ButtonsComponent,
+    ForbiddenErrorComponent
   ],
   imports: [
     BrowserModule,

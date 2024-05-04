@@ -1,6 +1,6 @@
 <div id="loginBody">
-    <div class="container-fluid justify-content-center d-flex w-75 ">
-        <div class="col-md-4">
+    <div class="container-fluid justify-content-center d-flex w-75">
+        <div class="col-md-3">
             <form (ngSubmit)="OnSubmitLogin()" #loginForm="ngForm">
                 <h2 class="text-center" style="margin: 35px;">Iniciar Sesión</h2>
                 <div class="form-outline mb-4">
@@ -12,9 +12,9 @@
                     <input class="form-control" type="password" id="password" name="password" [(ngModel)]="password" required>
                 </div>
                 <div class="container-fluid d-flex justify-content-center">
-                    <button class="btn btn-block mb-4 btn-form-login px-4 py-2 mt-4 " type="submit"> Iniciar Sesión </button>
+                    <button class="btn btn-block mb-4 btn-form-login px-4 py-2 mt-4" type="submit"> Iniciar Sesión </button>
                 </div>
-                <div *ngIf="httpMessage?.status===400 || httpMessage?.status===401" class="alert alert-danger text-center">{{ httpMessage?.message }}</div>
+                <div *ngIf="httpMessage?.status===400 || httpMessage?.status===404" class="alert alert-danger text-center">{{ httpMessage?.message }}</div>
             </form>
         </div>
     </div>

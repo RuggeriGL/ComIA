@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { httpMessagesService } from '../../services/http-messages.service';
+import { HttpMessagesService } from '../../services/http-messages.service';
 import { Message } from '../../model/Message';
 
 @Component({
@@ -9,7 +9,7 @@ import { Message } from '../../model/Message';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit{
-  constructor ( private authService : AuthService , private httpMessagesService : httpMessagesService ){}
+  constructor ( private authService : AuthService , private httpMessagesService : HttpMessagesService ){}
 
   httpMessage : Message | undefined;
 

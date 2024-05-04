@@ -5,7 +5,7 @@ import { Message } from '../model/Message';
 @Injectable({
   providedIn: 'root'
 })
-export class httpMessagesService {
+export class HttpMessagesService {
 
   private messageSource = new BehaviorSubject<Message>({status:0, message:""});
 
