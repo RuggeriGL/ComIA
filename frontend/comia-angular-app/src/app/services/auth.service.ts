@@ -15,7 +15,7 @@ export class AuthService {
 
   constructor( private axiosService : AxiosService , private httpMessagesService : HttpMessagesService ){ }
 
-
+  firstName: string = "default";
 
   onLogin(input : any){
     this.axiosService.request(
@@ -26,14 +26,16 @@ export class AuthService {
         password: input.password
       }
     ).then(response => {
-      this.axiosService.setAuthToken(response.data.token);
-      this.componentToShow = "messages";
       if(response.status===200){
         this.handleHttpOk({
           status:response.status,
           message:"Usuario logeado"
         })
+        this.firstName=response.data.firstName;
+        console.log(this.firstName);
       }
+      this.axiosService.setAuthToken(response.data.token);
+      this.componentToShow = "messages";
     });
   }
 
@@ -72,6 +74,10 @@ export class AuthService {
   // Método para obtener un Observable del estado de autenticación
   isAuthenticated(): Observable<boolean | null> {
     return this.axiosService.getLoggedIn();
+  }
+
+  getFirstName():string{
+    return this.firstName;
   }
 
 }
