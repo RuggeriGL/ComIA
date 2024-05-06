@@ -1,0 +1,66 @@
+<div class="container mt-4">
+    <div class="row">
+      <!-- Barra de búsqueda -->
+      <div class="col-md-8 offset-md-2">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Buscar recetas...">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button">Buscar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <!-- Filtros -->
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-header">
+            Filtros
+          </div>
+          <div class="card-body">
+            <!-- Aquí puedes colocar tus filtros -->
+            <div class="form-group">
+              <label for="tipoComida">Tipo de Comida</label>
+              <select class="form-control" id="tipoComida">
+                <option>Todos</option>
+                <option>Desayuno</option>
+                <option>Almuerzo</option>
+                <option>Cena</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="dificultad">Dificultad</label>
+              <select class="form-control" id="dificultad">
+                <option>Todos</option>
+                <option>Fácil</option>
+                <option>Intermedio</option>
+                <option>Difícil</option>
+              </select>
+            </div>
+            <!-- Puedes añadir más filtros según tus necesidades -->
+          </div>
+        </div>
+      </div>
+  
+      <!-- Recetas Populares -->
+      <div class="col-md-9">
+        <h2>Recetas Populares</h2>
+        <div class="row">
+          <!-- Aquí irán las tarjetas de las recetas -->
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <img src="..." class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Nombre de la Receta</h5>
+                <p class="card-text">Breve descripción de la receta.</p>
+                <a href="#" class="btn btn-primary">Ver Receta</a>
+              </div>
+            </div>
+          </div>
+          <!-- Repite esta tarjeta para cada receta -->
+        </div>
+      </div>
+    </div>
+  </div>
+  

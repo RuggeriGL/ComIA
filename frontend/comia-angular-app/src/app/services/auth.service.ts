@@ -4,6 +4,7 @@ import { HttpMessagesService } from './http-messages.service';
 import { Message } from '../model/Message';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,9 @@ export class AuthService {
   private componentToShow: string = "";
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
 
-  constructor( private axiosService : AxiosService , private httpMessagesService : HttpMessagesService ){ }
+  constructor( private axiosService : AxiosService , private httpMessagesService : HttpMessagesService , private router : Router ){ }
 
-
+  firstName: string = "default";
 
   onLogin(input : any){
     this.axiosService.request(
@@ -26,14 +27,19 @@ export class AuthService {
         password: input.password
       }
     ).then(response => {
-      this.axiosService.setAuthToken(response.data.token);
-      this.componentToShow = "messages";
       if(response.status===200){
         this.handleHttpOk({
           status:response.status,
           message:"Usuario logeado"
         })
+        this.firstName=response.data.firstName;
+        console.log(this.firstName);
+
+        // Redireccionar a welcome
+        this.router.navigateByUrl("/welcome")
       }
+      this.axiosService.setAuthToken(response.data.token);
+      this.componentToShow = "messages";
     });
   }
 
@@ -70,8 +76,16 @@ export class AuthService {
   }
 
   // Método para obtener un Observable del estado de autenticación
-  isAuthenticated(): Observable<boolean | null> {
+  isAuthenticatedObservable(): Observable<boolean | null> {
     return this.axiosService.getLoggedIn();
+  }
+
+  isAuthenticated(){
+    return this.axiosService.isAuthenticated();
+  }
+
+  getFirstName():string{
+    return this.firstName;
   }
 
 }

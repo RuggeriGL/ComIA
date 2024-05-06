@@ -28,4 +28,12 @@ html, body {
 .app-footer {
     grid-area: footer; /* Designa el área del grid para el footer */
 }
+
+.color-dorado {
+    color: #C6AA6B;
+}
+
+.bg-color-dorado {
+    background-color: #C6AA6B;
+}
   

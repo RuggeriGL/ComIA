@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterOutlet } from '@angular/router';
 import { ButtonsComponent } from './components/buttons/buttons.component';
 import { ForbiddenErrorComponent } from './components/errors/forbidden-error/forbidden-error.component';
+import { RecipesComponent } from './pages/recipes/recipes.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ForbiddenErrorComponent } from './components/errors/forbidden-error/for
     LoginComponent,
     RegisterComponent,
     ButtonsComponent,
-    ForbiddenErrorComponent
+    ForbiddenErrorComponent,
+    RecipesComponent,
   ],
   imports: [
     BrowserModule,

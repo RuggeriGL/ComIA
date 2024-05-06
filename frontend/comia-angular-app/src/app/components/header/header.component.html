@@ -17,6 +17,9 @@
               <a class="nav-link" routerLink="/">Inicio</a>
             </li>
             <li class="nav-item mx-4">
+              <a class="nav-link" routerLink="/recipes">Recetas</a>
+            </li>
+            <li class="nav-item mx-4">
               <a class="nav-link" routerLink="/about">Acerca de</a>
             </li>
             <li class="nav-item mx-4">
@@ -25,7 +28,7 @@
             <div class="dropdown mx-4">
               <button class="btn dropdown-toggle nav-link" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                   <i *ngIf="!isLoggedIn" class="fa fa-user"></i>
-                  <i *ngIf="isLoggedIn" class="fa-solid fa-sign-out"></i>
+                  <i *ngIf="isLoggedIn" [ngClass]="classUserIcon"></i>
               </button>
               <ul class="dropdown-menu dropdown-menu-end bg-dark mr-2" aria-labelledby="dropdownMenuButton">
                 <li><a *ngIf="!isLoggedIn" class="nav-link" routerLink="/login">Iniciar Sesión</a></li>
