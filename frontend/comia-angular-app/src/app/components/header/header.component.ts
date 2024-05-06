@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
 
   
   ngOnInit(): void {
-    this.authService.isAuthenticated().subscribe(isAuthenticated => {
+    this.authService.isAuthenticatedObservable().subscribe(isAuthenticated => {
       // Actualizar la propiedad isAuthenticated cuando cambie el estado de autenticación
       this.isLoggedIn = isAuthenticated;
       if (this.isLoggedIn && this.authService.getFirstName() != "default"){

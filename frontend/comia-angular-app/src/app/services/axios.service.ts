@@ -59,6 +59,10 @@ export class AxiosService {
   getLoggedIn() : Observable<boolean | null> {
     return this.authTokenSubject.asObservable();
   }
+
+  isAuthenticated(){
+    return this.getAuthToken()? true:false;
+  }
   
 
   setAuthToken(authToken: string) {
