@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<div class="container-fluid mt-4 mx-4">
     <div class="row">
       <!-- Barra de búsqueda -->
       <div class="col-md-8 offset-md-2">
@@ -13,7 +13,7 @@
   
     <div class="row">
       <!-- Filtros -->
-      <div class="col-md-3">
+      <div class="col-md-2">
         <div class="card">
           <div class="card-header">
             Filtros
@@ -44,22 +44,56 @@
       </div>
   
       <!-- Recetas Populares -->
-      <div class="col-md-9">
+      <div class="col-md-10">
         <h2>Recetas Populares</h2>
         <div class="row">
-          <!-- Aquí irán las tarjetas de las recetas -->
-          <div class="col-md-4 mb-4">
-            <div class="card">
-              <img src="..." class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Nombre de la Receta</h5>
-                <p class="card-text">Breve descripción de la receta.</p>
-                <a href="#" class="btn btn-primary">Ver Receta</a>
+          <!-- Tarjetas ajustables con altura uniforme -->
+          <div *ngFor="let recipe of recipes" class="col-12 col-sm-12 col-md-6 col-lg-3 m-2 p-2">
+              <div class="card recipe-card">
+                  <img [src]="recipe.image" class="card-img-top" alt="Imagen de la receta">
+                  <div class="card-body">
+                      <h5 class="card-title">{{ recipe.title }}</h5>
+                      <div class="row mx-1">
+                        <div class="recipe-icon-holder col-md" [title]="'Ready in ' + recipe.readyInMinutes + ' minutes'">
+                          <i class="fa-regular fa-clock" style="color: rgb(157, 131, 26);"></i>
+                          <div>{{recipe.readyInMinutes}}'</div>
+                        </div>
+                        <div class="recipe-icon-holder col-md" [title]="'Health Score: '+ recipe.healthScore">
+                          <i class="fa-solid fa-heart" style="color: rgb(225, 99, 77);"></i>
+                          <div>{{recipe.healthScore}}</div>
+                        </div>
+                        <div class="recipe-icon-holder col-md" [title]="'Servings: ' + recipe.servings">
+                          <i class="fa-solid fa-spoon" style="color: rgb(123, 98, 102);"></i>
+                          <div>{{recipe.servings}}</div>
+                        </div>
+                        <div *ngIf="recipe.cheap" class="recipe-icon-holder col-md">
+                          <i class="fa-solid fa-dollar-sign" style="color: rgb(2, 83, 11);"></i>
+                          <div>cheap</div>
+                        </div>
+                        <div class="row recipe-dietary mx-auto py-1 my-2 w-100" style="background-color: rgba(219, 189, 193, 0.284);">
+                          <div *ngIf="recipe.vegetarian" title="vegetarian recipe" class="col-md-3 text-center">
+                            <i class="fa-solid fa-seedling" style="color: rgb(2, 83, 11);"></i>
+                            <div class="dietary-item" style="font-weight: 600; color: rgb(2, 83, 11);"> veggie</div>
+                          </div>
+                          <div *ngIf="recipe.vegan" title="vegan recipe" class="col-md-3 text-center">
+                            <i class="fa-solid fa-leaf" style="color: rgb(8, 126, 22);"></i> 
+                            <div class="dietary-item" style="font-weight: 600; color: rgb(8, 126, 22);"> vegan</div>
+                          </div>
+                          <div *ngIf="recipe.glutenFree" title="gluten free recipe" class="col-md-3 text-center">
+                            <i class="fa-solid fa-wheat-awn" style="color: rgb(206, 135, 20);"></i>
+                            <div class="dietary-item" style="font-weight: 600; color: rgb(206, 135, 20);"> free</div>
+                          </div>
+                          <div *ngIf="recipe.dairyFree" title="dairy free recipe" class="col-md-3 text-center">
+                            <i class="fa-solid fa-cow" style="color: rgb(78, 43, 0);"></i>
+                            <div class="dietary-item" style="font-weight: 600; color: rgb(78, 43, 0);"> free</div>
+                          </div>
+                        </div>
+                      </div>
+                      <p class="card-text" [innerHTML]=" recipe.summary | slice:0:150...">...</p>
+                      <a [href]="recipe.sourceUrl" class="btn bg-color-dorado" style="font-weight: 600;">See more</a>
+                  </div>
               </div>
-            </div>
           </div>
-          <!-- Repite esta tarjeta para cada receta -->
-        </div>
       </div>
     </div>
   </div>

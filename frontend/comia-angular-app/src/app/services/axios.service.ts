@@ -36,15 +36,29 @@ export class AxiosService {
       method: method,
       url: url,
       data: data,
+      headers: headers
     }).catch(error => {
-      if (error.response && error.request.status===403){
-        this.router.navigateByUrl('/403');
-      }
-      if(error.response.status===404 || error.response.status===400){
-        this.handleHttpError({
-          status: error.response.status,
-          message: error.response.data.message
-        })
+      if (error.response){
+        switch(error.response.status) {
+          case 401: 
+            this.logout();
+            break;
+          case 403:
+            this.router.navigateByUrl('/403');
+            break;
+          case 400:
+            this.handleHttpError({
+              status: error.response.status,
+              message: error.response.data.message
+            })
+            break;
+          case 404:
+            this.handleHttpError({
+              status: error.response.status,
+              message: error.response.data.message
+            })
+            break;
+        }
       }
     });
   }

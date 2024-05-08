@@ -28,6 +28,7 @@ public class AuthController {
     public ResponseEntity<UserDto> login(@RequestBody CredentialsDto credentialsDto) {
         UserDto user = userService.login(credentialsDto);
         user.setToken(userAuthProvider.createToken(user));
+        //System.out.println("USER TOKEN: "+user.getToken());
         return ResponseEntity.ok(user);
     }
 
@@ -35,6 +36,7 @@ public class AuthController {
     public ResponseEntity<UserDto> register(@RequestBody SignUpDto singUpDto) {
         UserDto userDto = userService.register(singUpDto);
         userDto.setToken(userAuthProvider.createToken(userDto));
+        //System.out.println("USER TOKEN: "+userDto.getToken());
         return ResponseEntity.created(URI.create("/users/" + userDto.getId())).body(userDto);
     }
 }
