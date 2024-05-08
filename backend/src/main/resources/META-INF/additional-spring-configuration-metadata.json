@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "spoonacular.api.key",
+    "type": "java.lang.String",
+    "description": "A description for 'spoonacular.api.key'"
+  },
+  {
+    "name": "spoonacular.api.language",
+    "type": "java.lang.String",
+    "description": "A description for 'spoonacular.api.language'"
+  },
+  {
+    "name": "spoonacular.api.base.path",
+    "type": "java.lang.String",
+    "description": "A description for 'spoonacular.api.base.path'"
+  }
+]}

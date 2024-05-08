@@ -44,6 +44,9 @@ public class UserAuthProvider {
     public String createToken(UserDto userDto){
         Date now = new Date();
         Date validity = new Date(now.getTime() + 3_600_000);
+        //TESTS - 401 error
+        //Date validity = new Date(now.getTime() + 5 * 1000); // 5 segundos * 1000 ms/segundo
+
 
         return JWT.create()
             .withIssuer(userDto.getEmail())

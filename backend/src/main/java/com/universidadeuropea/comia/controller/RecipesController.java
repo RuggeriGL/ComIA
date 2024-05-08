@@ -1,0 +1,53 @@
+package com.universidadeuropea.comia.controller;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import com.universidadeuropea.comia.service.RecipesService;
+import reactor.core.publisher.Mono;
+
+
+
+@RestController
+public class RecipesController {
+
+    @Value("${spoonacular.api.key}")
+    private String apiKey;
+    
+    @Value("${spoonacular.api.base.path}")
+    private String basePath;
+
+    @Value("${spoonacular.api.language}")
+    private String lang;
+
+    @Autowired
+    private RecipesService recipesService;
+  
+
+    @GetMapping(value={"/random"})
+    public ResponseEntity<String> getRandomRecipes() {
+        try {
+            String recipes = recipesService.getRecipes();
+            return ResponseEntity.ok().body(recipes);
+        } catch (IOException | InterruptedException | URISyntaxException e) {
+            return ResponseEntity.internalServerError().body("Error retrieving recipes: " + e.getMessage());
+        }
+    }
+    
+    @GetMapping(value={"/test"})
+    public ResponseEntity<String> getTestRecipes() {
+        try {
+            String recipes = recipesService.getTestRecipes();
+            return ResponseEntity.ok().body(recipes);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error retrieving recipes: " + e.getMessage());
+        }
+    }
+
+
+}
