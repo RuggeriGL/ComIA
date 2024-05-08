@@ -54,15 +54,15 @@
                   <div class="card-body">
                       <h5 class="card-title">{{ recipe.title }}</h5>
                       <div class="row mx-1">
-                        <div class="recipe-icon-holder col-md">
+                        <div class="recipe-icon-holder col-md" [title]="'Ready in ' + recipe.readyInMinutes + ' minutes'">
                           <i class="fa-regular fa-clock" style="color: rgb(157, 131, 26);"></i>
                           <div>{{recipe.readyInMinutes}}'</div>
                         </div>
-                        <div class="recipe-icon-holder col-md">
+                        <div class="recipe-icon-holder col-md" [title]="'Health Score: '+ recipe.healthScore">
                           <i class="fa-solid fa-heart" style="color: rgb(225, 99, 77);"></i>
                           <div>{{recipe.healthScore}}</div>
                         </div>
-                        <div class="recipe-icon-holder col-md">
+                        <div class="recipe-icon-holder col-md" [title]="'Servings: ' + recipe.servings">
                           <i class="fa-solid fa-spoon" style="color: rgb(123, 98, 102);"></i>
                           <div>{{recipe.servings}}</div>
                         </div>
@@ -71,19 +71,19 @@
                           <div>cheap</div>
                         </div>
                         <div class="row recipe-dietary mx-auto py-1 my-2 w-100" style="background-color: rgba(219, 189, 193, 0.284);">
-                          <div *ngIf="recipe.vegetarian" class="col-md-3 text-center">
+                          <div *ngIf="recipe.vegetarian" title="vegetarian recipe" class="col-md-3 text-center">
                             <i class="fa-solid fa-seedling" style="color: rgb(2, 83, 11);"></i>
                             <div class="dietary-item" style="font-weight: 600; color: rgb(2, 83, 11);"> veggie</div>
                           </div>
-                          <div *ngIf="recipe.vegan" class="col-md-3 text-center">
+                          <div *ngIf="recipe.vegan" title="vegan recipe" class="col-md-3 text-center">
                             <i class="fa-solid fa-leaf" style="color: rgb(8, 126, 22);"></i> 
                             <div class="dietary-item" style="font-weight: 600; color: rgb(8, 126, 22);"> vegan</div>
                           </div>
-                          <div *ngIf="recipe.glutenFree" class="col-md-3 text-center">
+                          <div *ngIf="recipe.glutenFree" title="gluten free recipe" class="col-md-3 text-center">
                             <i class="fa-solid fa-wheat-awn" style="color: rgb(206, 135, 20);"></i>
                             <div class="dietary-item" style="font-weight: 600; color: rgb(206, 135, 20);"> free</div>
                           </div>
-                          <div *ngIf="recipe.dairyFree" class="col-md-3 text-center">
+                          <div *ngIf="recipe.dairyFree" title="dairy free recipe" class="col-md-3 text-center">
                             <i class="fa-solid fa-cow" style="color: rgb(78, 43, 0);"></i>
                             <div class="dietary-item" style="font-weight: 600; color: rgb(78, 43, 0);"> free</div>
                           </div>
