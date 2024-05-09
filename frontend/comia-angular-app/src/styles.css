@@ -1,5 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
-/* You can add global styles to this file, and also import other style files */
+@import "@ng-select/ng-select/themes/default.theme.css";
+
 html, body {
     height: 100%; /* Esto es importante para que el diseño de grid funcione correctamente */
     margin: 0; /* Elimina el margen por defecto */
@@ -37,3 +37,32 @@ html, body {
     background-color: #C6AA6B;
 }
   
+.filters label{
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.6rem;
+}
+
+.filters h5{
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.filters .card-body {
+    background-color: rgba(208, 192, 145, 0.249);
+}
+
+.hover-dorado:hover{
+    background-color: #C6AA6B;
+    color: black;
+}
+
+.hover-gris:hover{
+    color: white;
+    background-color: gray;
+}
+
+.sort-pressed {
+    color: black
+}

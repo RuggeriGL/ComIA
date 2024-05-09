@@ -16,6 +16,7 @@ import { RouterOutlet } from '@angular/router';
 import { ButtonsComponent } from './components/buttons/buttons.component';
 import { ForbiddenErrorComponent } from './components/errors/forbidden-error/forbidden-error.component';
 import { RecipesComponent } from './pages/recipes/recipes.component';
+import { NgSelectComponent, NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { RecipesComponent } from './pages/recipes/recipes.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterOutlet
+    RouterOutlet,
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
