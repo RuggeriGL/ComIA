@@ -7,7 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.universidadeuropea.comia.model.RecipeSearchCriteria;
 import com.universidadeuropea.comia.service.RecipesService;
 import reactor.core.publisher.Mono;
 
@@ -47,6 +52,19 @@ public class RecipesController {
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Error retrieving recipes: " + e.getMessage());
         }
+    }
+
+    @PostMapping("/complexSearch")
+    public Object performComplexSearch(@RequestBody RecipeSearchCriteria criteria) {
+        RestTemplate restTemplate = new RestTemplate();
+        String apiUrl = "https://externalapi.com/recipes/complexSearch";
+        
+        // Asumiendo que necesitas enviar los criterios como un JSON en el cuerpo de la solicitud
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<RecipeSearchCriteria> request = new HttpEntity<>(criteria, headers);
+
+        return restTemplate.postForObject(apiUrl, request, Object.class);
     }
 
 
