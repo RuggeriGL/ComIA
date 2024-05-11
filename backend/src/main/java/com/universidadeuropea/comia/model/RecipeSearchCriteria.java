@@ -1,10 +1,10 @@
 package com.universidadeuropea.comia.model;
 
-import java.util.Map;
-
 import lombok.Data;
+import lombok.ToString;;
 
 @Data
+@ToString
 public class RecipeSearchCriteria {
     private String query;
     private String[] cuisine;
@@ -30,6 +30,6 @@ public class RecipeSearchCriteria {
     private NutritionalValues nutritionalValues;
     private Pagination pagination;
     private boolean limitLicense;
-
+    
 }
 

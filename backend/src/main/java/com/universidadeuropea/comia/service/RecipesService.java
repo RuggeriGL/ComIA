@@ -378,7 +378,7 @@ public class RecipesService {
 
         HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
 
-        System.out.println("URL Requested: " + builder.build().toString());
+        //System.out.println("URL Requested: " + builder.build().toString());
 
         if (response.statusCode() == 200) {
             System.out.println(response.body());

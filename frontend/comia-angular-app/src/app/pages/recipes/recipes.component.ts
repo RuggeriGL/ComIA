@@ -12,6 +12,7 @@ import { Results } from '../../model/Results';
 export class RecipesComponent implements OnInit {
 
 
+
   query: string | undefined;
   recipes: Recipe[] = [];
   results: Results[] = [];
@@ -244,6 +245,13 @@ export class RecipesComponent implements OnInit {
 
   unselectAllCuisines() {
     this.recipeSearchCriteria.cuisine = [];
+  }
+
+  selectAllExcludeCuisines() {
+    this.recipeSearchCriteria.excludeCuisine = this.cuisines.map(x => x.id);
+  }
+  unselectAllExcludeCuisines() {
+    this.recipeSearchCriteria.excludeCuisine = [];
   }
 
 
