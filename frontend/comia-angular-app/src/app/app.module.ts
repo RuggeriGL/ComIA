@@ -17,6 +17,8 @@ import { ButtonsComponent } from './components/buttons/buttons.component';
 import { ForbiddenErrorComponent } from './components/errors/forbidden-error/forbidden-error.component';
 import { RecipesComponent } from './pages/recipes/recipes.component';
 import { NgSelectComponent, NgSelectModule } from '@ng-select/ng-select';
+import { VirtualFridgeComponent } from './pages/virtual-fridge/virtual-fridge.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { NgSelectComponent, NgSelectModule } from '@ng-select/ng-select';
     ButtonsComponent,
     ForbiddenErrorComponent,
     RecipesComponent,
+    VirtualFridgeComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

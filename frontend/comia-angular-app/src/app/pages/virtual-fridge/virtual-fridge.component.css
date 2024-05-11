@@ -1,0 +1,9 @@
+.bg-empty-fridge {
+    background-image: url('../../../assets/images/empty_fridge_bg.webp'); /* Asegúrate de poner la ruta correcta a tu imagen */
+    background-size: cover;  /* Esto hace que la imagen cubra completamente el div sin distorsionarse */
+    background-position: center;  /* Centra la imagen en el div */
+    height: 100vh; /* Esto hace que el div tenga el 100% de la altura de la ventana del navegador */
+    width: 100vw; /* Esto hace que el div tenga el 100% del ancho de la ventana del navegador */
+    top: 0; /* Opcional: alinea el div en la parte superior de la ventana */
+    left: 0; /* Opcional: alinea el div en el lado izquierdo de la ventana */
+}

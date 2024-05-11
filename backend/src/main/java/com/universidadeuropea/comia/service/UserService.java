@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +56,23 @@ public class UserService {
         return userMapper.toUserDto(savedUser);
 
     }
+
+    public UserDto whoami() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDto user = (UserDto) authentication.getPrincipal();
+
+        Usuario usuario = usuarioRepository.findByEmail(user.getEmail())
+                .orElseThrow(() -> new AppException("Email desconocido", HttpStatus.NOT_FOUND));
+        
+        if(usuario!=null){
+            user.setId(usuario.getId());
+            user.setFirstName(usuario.getFirstName());
+            return user;
+        }
+        throw new AppException("Contraseña incorrecta", HttpStatus.BAD_REQUEST);
+    }
+
+
 }
 
 

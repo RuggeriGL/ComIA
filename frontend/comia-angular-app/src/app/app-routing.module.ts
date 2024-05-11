@@ -9,16 +9,20 @@ import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { authGuardGuard } from './guards/auth-guard.guard';
 import { loginGuardGuard } from './guards/login-guard.guard';
 import { RecipesComponent } from './pages/recipes/recipes.component';
+import { VirtualFridgeComponent } from './pages/virtual-fridge/virtual-fridge.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   
-  {path: '', redirectTo: '', pathMatch:'full'},
+  {path: '', redirectTo: '/home', pathMatch:'full'},
   {path: 'register', component: RegisterComponent, canActivate: [loginGuardGuard]},
   {path: 'login', component: LoginComponent, canActivate: [loginGuardGuard]},
   {path: 'welcome', component:WelcomeComponent, canActivate: [authGuardGuard]},
   {path: 'recipes', component:RecipesComponent},
+  {path: 'vfridge', component: VirtualFridgeComponent, canActivate: [authGuardGuard]},
   {path: 'about', component: AboutComponent},
   {path: 'contact', component: ContactComponent},
+  {path: 'home', component: HomeComponent },
   {path: '403', component: ForbiddenErrorComponent}
 
 
