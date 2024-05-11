@@ -54,17 +54,17 @@ public class RecipesController {
         }
     }
 
-    @PostMapping("/complexSearch")
-    public Object performComplexSearch(@RequestBody RecipeSearchCriteria criteria) {
-        RestTemplate restTemplate = new RestTemplate();
-        String apiUrl = "https://externalapi.com/recipes/complexSearch";
-        
-        // Asumiendo que necesitas enviar los criterios como un JSON en el cuerpo de la solicitud
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<RecipeSearchCriteria> request = new HttpEntity<>(criteria, headers);
+    @PostMapping(value = {"/complexSearch"})
+    public ResponseEntity<String> performComplexSearch(@RequestBody RecipeSearchCriteria criteria) {
 
-        return restTemplate.postForObject(apiUrl, request, Object.class);
+        System.out.println(criteria.toString());
+        
+        try {
+            String recipes = recipesService.getComplexSearchRecipes(criteria);
+            return ResponseEntity.ok().body(recipes);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error retrieving recipes: " + e.getMessage());
+        }
     }
 
 

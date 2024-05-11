@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AxiosService } from '../../services/axios.service';
 import { Recipe } from '../../model/Recipe';
+import { RecipeSearchCriteria } from '../../model/RecipeSearchCriteria';
+import { Results } from '../../model/Results';
 
 @Component({
   selector: 'app-recipes',
@@ -9,13 +11,16 @@ import { Recipe } from '../../model/Recipe';
 })
 export class RecipesComponent implements OnInit {
 
+
   query: string | undefined;
-  recipes : Recipe[] = [];
+  recipes: Recipe[] = [];
+  results: Results[] = [];
+  recipeSearchCriteria: RecipeSearchCriteria = {};
 
   selectedMealTypes : string[] = [];
   selectedIntolerances : string[] = [];
   selectedDiets : string[] = [];
-  selectedCruisines : string[] = [];
+  selectedCuisines : string[] = [];
   sortSelected: string | undefined;
   sortDirection: string | undefined;
   classSortAsc: string | undefined;
@@ -68,7 +73,7 @@ export class RecipesComponent implements OnInit {
     { id: 'Low FODMAP', name : 'Low FODMAP'},
     { id: 'Whole30', name : 'Whole30'}
   ];
-  cruisines: any[] = [
+  cuisines: any[] = [
     //{ id: '1', name: 'All'},
     { id: 'African', name: 'African'},
     { id: 'Asian', name: 'Asian'},
@@ -154,11 +159,45 @@ export class RecipesComponent implements OnInit {
     {id:'zinc', name:'zinc'}
   ];
 
+
   constructor ( private axiosService : AxiosService ) {}
 
   ngOnInit(): void {
     //this.getRandomRecipes();
     this.getTestRecipes()
+  }
+
+  complexSearch() {
+    if (this.query && this.query!==''){
+      this.recipeSearchCriteria.query=this.query;
+    }
+    if (this.selectedMealTypes && this.selectedMealTypes.length>0){
+      this.recipeSearchCriteria.type=this.selectedMealTypes;
+    }
+    if (this.selectedIntolerances && this.selectedIntolerances.length>0){
+      this.recipeSearchCriteria.intolerances=this.selectedIntolerances;
+    }
+    if (this.selectedDiets && this.selectedDiets.length>0){
+      this.recipeSearchCriteria.diet=this.selectedDiets;
+    }
+    if (this.selectedCuisines && this.selectedCuisines.length>0){
+      this.recipeSearchCriteria.cuisine=this.selectedCuisines;
+    }
+    if (this.sortSelected && this.sortSelected.length>0){
+      this.recipeSearchCriteria.sort=this.sortSelected;
+    }
+    if (this.sortDirection && this.sortDirection.length>0){
+      this.recipeSearchCriteria.sortDirection=this.sortDirection;
+    }
+
+    this.recipeSearchCriteria.instructionsRequired=false;
+    this.recipeSearchCriteria.fillIngredients=false;
+    this.recipeSearchCriteria.addRecipeInformation=true;
+    
+    this.axiosService.request("POST" , "/complexSearch" , this.recipeSearchCriteria).then(response =>{
+      this.recipes = response.data.results;
+      console.log(response);
+    });
   }
 
   getRandomRecipes():void{
@@ -176,41 +215,41 @@ export class RecipesComponent implements OnInit {
   }
 
   selectAllMealTypes() {
-    this.selectedMealTypes = this.mealTypes.map(x => x.id);
+    this.recipeSearchCriteria.type = this.mealTypes.map(x => x.id);
   }
 
   unselectAllMealTypes() {
-    this.selectedMealTypes = [];
+    this.recipeSearchCriteria.type = [];
   }
 
   selectAllIntolerances() {
-    this.selectedIntolerances = this.intolerances.map(x => x.id);
+    this.recipeSearchCriteria.intolerances = this.intolerances.map(x => x.id);
   }
 
   unselectAllIntolerances() {
-    this.selectedIntolerances = [];
+    this.recipeSearchCriteria.intolerances = [];
   }
 
   selectAllDiets() {
-    this.selectedDiets = this.diets.map(x => x.id);
+    this.recipeSearchCriteria.diet = this.diets.map(x => x.id);
   }
 
   unselectAllDiets() {
-    this.selectedDiets = [];
+    this.recipeSearchCriteria.diet = [];
   }
 
-  selectAllCruisines() {
-    this.selectedCruisines = this.cruisines.map(x => x.id);
+  selectAllCuisines() {
+    this.recipeSearchCriteria.cuisine = this.cuisines.map(x => x.id);
   }
 
-  unselectAllCruisines() {
-    this.selectedCruisines = [];
+  unselectAllCuisines() {
+    this.recipeSearchCriteria.cuisine = [];
   }
 
 
 
   clearFilters() {
-    this.unselectAllCruisines();
+    this.unselectAllCuisines();
     this.unselectAllMealTypes();
     this.unselectAllIntolerances();
     this.unselectAllDiets();
@@ -222,26 +261,26 @@ export class RecipesComponent implements OnInit {
 
 
   setSortDesc() {
-    if(this.sortSelected? true : false){
-      this.sortDirection = "desc";
+    if(this.recipeSearchCriteria.sort? true : false){
+      this.recipeSearchCriteria.sortDirection = "desc";
       this.classSortDesc = "sort-pressed"
       this.classSortAsc = "";
     }
   }
   setSortAsc() {
-    if(this.sortSelected? true : false){
-      this.sortDirection = "asc";
+    if(this.recipeSearchCriteria.sort? true : false){
+      this.recipeSearchCriteria.sortDirection = "asc";
       this.classSortAsc = "sort-pressed";
       this.classSortDesc = "";
     }
   }
 
   updateSort() {
-    if(this.sortSelected? true : false){
-      this.sortDirection = "desc";
+    if(this.recipeSearchCriteria.sort? true : false){
+      this.recipeSearchCriteria.sortDirection = "desc";
       this.classSortDesc = "sort-pressed"
     } else {
-      this.sortDirection = ""
+      this.recipeSearchCriteria.sortDirection = ""
       this.classSortAsc = "";
       this.classSortDesc = "";
     }

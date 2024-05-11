@@ -3,9 +3,9 @@
     <!-- Barra de búsqueda -->
     <div class="col-md-8 offset-md-2">
       <div class="input-group mb-3">
-        <input type="text" [(ngModel)]="query" class="form-control" placeholder="Search recipes...">
+        <input type="text" [(ngModel)]="recipeSearchCriteria.query" class="form-control" placeholder="Search recipes...">
         <div class="input-group-append">
-          <button class="btn bg-color-dorado hover-gris" type="button" style="font-weight: 600;">Search</button>
+          <button class="btn bg-color-dorado hover-gris" (click)="complexSearch()" type="button" style="font-weight: 600;">Search</button>
         </div>
       </div>
     </div>
@@ -21,22 +21,22 @@
         <div class="card-body">
           <!-- Cuisine Filter -->
           <div class="mt-2">
-            <label for="intolerances">Cruisine</label>
-            <ng-select [multiple]="true" [items]="cruisines" [(ngModel)]="selectedCruisines"
+            <label for="intolerances">Cuisine</label>
+            <ng-select [multiple]="true" [items]="cuisines" [(ngModel)]="recipeSearchCriteria.cuisine"
               placeholder="Select cruisines" bindLabel="name" bindValue="id">
               <ng-template ng-header-tmp>
-                <button (click)="selectAllCruisines()" class="btn btn-sm btn-secondary">Select all</button>
-                <button (click)="unselectAllCruisines()" class="btn btn-sm btn-secondary">Unselect all</button>
+                <button (click)="selectAllCuisines()" class="btn btn-sm btn-secondary">Select all</button>
+                <button (click)="unselectAllCuisines()" class="btn btn-sm btn-secondary">Unselect all</button>
               </ng-template>
               <ng-template ng-footer-tmp>
-                Selected count: {{selectedCruisines.length}}
+                Selected count: {{selectedCuisines.length}}
               </ng-template>
             </ng-select>
           </div>
           <!--diet filter-->
           <div class="mt-2">
             <label for="intolerances">Diets</label>
-            <ng-select [multiple]="true" [items]="diets" [(ngModel)]="selectedDiets" placeholder="Select diets"
+            <ng-select [multiple]="true" [items]="diets" [(ngModel)]="recipeSearchCriteria.diet" placeholder="Select diets"
               bindLabel="name" bindValue="id">
               <ng-template ng-header-tmp>
                 <button (click)="selectAllDiets()" class="btn btn-sm btn-secondary">Select all</button>
@@ -50,7 +50,7 @@
           <!--Intolerances-->
           <div class="mt-2">
             <label for="intolerances">Intolerances</label>
-            <ng-select [multiple]="true" [items]="intolerances" [(ngModel)]="selectedIntolerances"
+            <ng-select [multiple]="true" [items]="intolerances" [(ngModel)]="recipeSearchCriteria.intolerances"
               placeholder="Select intolerances" bindLabel="name" bindValue="id">
               <ng-template ng-header-tmp>
                 <button (click)="selectAllIntolerances()" class="btn btn-sm btn-secondary">Select all</button>
@@ -64,7 +64,7 @@
           <!--Meal Types-->
           <div class="mt-2">
             <label for="intolerances">Meal Type</label>
-            <ng-select [multiple]="true" [items]="mealTypes" [(ngModel)]="selectedMealTypes"
+            <ng-select [multiple]="true" [items]="mealTypes" [(ngModel)]="recipeSearchCriteria.type"
               placeholder="Select cruisines" bindLabel="name" bindValue="id">
               <ng-template ng-header-tmp>
                 <button (click)="selectAllMealTypes()" class="btn btn-sm btn-secondary">Select all</button>
@@ -77,7 +77,7 @@
           </div>
           <div class="row mt-4 aling-items-center justify-content-center d-flex">
             <div class="col-md-5">
-              <button class="btn btn-secondary w-100 hover-dorado" (click)="applyFilters()" style="font-weight: 500;">Filter</button>
+              <button class="btn btn-secondary w-100 hover-dorado" (click)="complexSearch()" style="font-weight: 500;">Filter</button>
             </div>
             <div class="col-md-5">
               <button class="btn btn-secondary w-100 hover-dorado" (click)="clearFilters()" style="font-weight: 500;">Clear Filters</button>
@@ -97,7 +97,7 @@
           <div class="input-group">
             <div class="flex-grow-1"> <!-- Agrega esta clase para asegurar que ng-select tenga espacio para crecer -->
               <ng-select (change)="updateSort()" [items]="sort" bindLabel="name" [multiple]="false"
-                bindValue="id" [(ngModel)]="sortSelected" placeholder="Sort by">
+                bindValue="id" [(ngModel)]="recipeSearchCriteria.sort" placeholder="Sort by">
               </ng-select>
             </div>
             <div class="input-group-append align-items-center d-flex">
@@ -107,7 +107,56 @@
           </div>
         </div>        
       </div>
-      <div class="row">
+      <div class="row" *ngIf="recipes">
+        <div *ngFor="let recipe of recipes" class="col-12 col-sm-12 col-md-6 col-lg-3 mt-2 mb-2 mx-auto p-4">
+          <div class="card recipe-card">
+            <img [src]="recipe.image" class="card-img-top" alt="Imagen de la receta">
+            <div class="card-body">
+              <h5 class="card-title">{{ recipe.title }}</h5>
+              <div class="row mx-1">
+                <div class="recipe-icon-holder col-md" [title]="'Ready in ' + recipe.readyInMinutes + ' minutes'">
+                  <i class="fa-regular fa-clock" style="color: rgb(157, 131, 26);"></i>
+                  <div>{{recipe.readyInMinutes}}'</div>
+                </div>
+                <div class="recipe-icon-holder col-md" [title]="'Health Score: '+ recipe.healthScore">
+                  <i class="fa-solid fa-heart" style="color: rgb(225, 99, 77);"></i>
+                  <div>{{recipe.healthScore}}</div>
+                </div>
+                <div class="recipe-icon-holder col-md" [title]="'Servings: ' + recipe.servings">
+                  <i class="fa-solid fa-spoon" style="color: rgb(123, 98, 102);"></i>
+                  <div>{{recipe.servings}}</div>
+                </div>
+                <div *ngIf="recipe.cheap" class="recipe-icon-holder col-md">
+                  <i class="fa-solid fa-dollar-sign" style="color: rgb(2, 83, 11);"></i>
+                  <div>cheap</div>
+                </div>
+                <div class="row recipe-dietary mx-auto py-1 my-2 w-100"
+                  style="background-color: rgba(219, 189, 193, 0.284);">
+                  <div *ngIf="recipe.vegetarian" title="vegetarian recipe" class="col-md-3 col-12 col-lg-6 col-sm-7 text-center">
+                    <i class="fa-solid fa-seedling" style="color: rgb(2, 83, 11);"></i>
+                    <div class="dietary-item" style="font-weight: 600; color: rgb(2, 83, 11);"> veggie</div>
+                  </div>
+                  <div *ngIf="recipe.vegan" title="vegan recipe" class="col-md-3 text-center">
+                    <i class="fa-solid fa-leaf" style="color: rgb(8, 126, 22);"></i>
+                    <div class="dietary-item" style="font-weight: 600; color: rgb(8, 126, 22);"> vegan</div>
+                  </div>
+                  <div *ngIf="recipe.glutenFree" title="gluten free recipe" class="col-md-3 text-center">
+                    <i class="fa-solid fa-wheat-awn" style="color: rgb(206, 135, 20);"></i>
+                    <div class="dietary-item" style="font-weight: 600; color: rgb(206, 135, 20);"> free</div>
+                  </div>
+                  <div *ngIf="recipe.dairyFree" title="dairy free recipe" class="col-md-3 text-center">
+                    <i class="fa-solid fa-cow" style="color: rgb(78, 43, 0);"></i>
+                    <div class="dietary-item" style="font-weight: 600; color: rgb(78, 43, 0);"> free</div>
+                  </div>
+                </div>
+              </div>
+              <p class="card-text" [innerHTML]=" recipe.summary | slice:0:150...">...</p>
+              <a [href]="recipe.sourceUrl" class="btn bg-color-dorado" style="font-weight: 600;">See more</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="results">
         <div *ngFor="let recipe of recipes" class="col-12 col-sm-12 col-md-6 col-lg-3 mt-2 mb-2 mx-auto p-4">
           <div class="card recipe-card">
             <img [src]="recipe.image" class="card-img-top" alt="Imagen de la receta">

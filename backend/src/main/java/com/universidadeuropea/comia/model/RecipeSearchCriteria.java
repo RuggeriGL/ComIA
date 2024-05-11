@@ -7,14 +7,14 @@ import lombok.Data;
 @Data
 public class RecipeSearchCriteria {
     private String query;
-    private String cuisine;
-    private String excludeCuisine;
-    private String diet;
-    private String intolerances;
-    private String equipment;
+    private String[] cuisine;
+    private String[] excludeCuisine;
+    private String[] diet;
+    private String[] intolerances;
+    private String[] equipment;
     private String[] includeIngredients;
     private String[] excludeIngredients;
-    private String type;
+    private String[] type;
     private boolean instructionsRequired;
     private boolean fillIngredients;
     private boolean addRecipeInformation;
