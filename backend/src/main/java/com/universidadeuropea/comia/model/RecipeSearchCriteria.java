@@ -31,5 +31,6 @@ public class RecipeSearchCriteria {
     private Pagination pagination;
     private boolean limitLicense;
     
+    
 }
 

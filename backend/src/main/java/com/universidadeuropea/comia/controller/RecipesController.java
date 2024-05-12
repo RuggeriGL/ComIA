@@ -1,7 +1,6 @@
 package com.universidadeuropea.comia.controller;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Date;
@@ -93,23 +92,23 @@ public class RecipesController {
             }
             
             if(criteria.getCuisine()!=null && StringUtils.isNotEmpty(criteria.getCuisine().toString())){
-                recipeHistory.setCuisine(Arrays.toString(criteria.getCuisine()));
+                recipeHistory.setCuisine(criteria.getCuisine());
             }
             
             if(criteria.getExcludeCuisine()!=null && StringUtils.isNotEmpty(criteria.getExcludeCuisine().toString())){
-                recipeHistory.setExcludeCuisine(Arrays.toString(criteria.getExcludeCuisine()));
+                recipeHistory.setExcludeCuisine(criteria.getExcludeCuisine());
             }
             
             if(criteria.getDiet()!=null && StringUtils.isNotEmpty(criteria.getDiet().toString())){
-                recipeHistory.setDiet(Arrays.toString(criteria.getDiet()));
+                recipeHistory.setDiet(criteria.getDiet());
             }
             
             if(criteria.getIncludeIngredients()!=null && StringUtils.isNotEmpty(criteria.getIncludeIngredients().toString())){
-                recipeHistory.setIngredients(Arrays.toString(criteria.getIncludeIngredients()));
+                recipeHistory.setIngredients(criteria.getIncludeIngredients());
             }
             
             if(criteria.getType()!=null && StringUtils.isNotEmpty(criteria.getType().toString())){
-                recipeHistory.setType(Arrays.toString(criteria.getType()));
+                recipeHistory.setType(criteria.getType());
             }
             recipeHistory.setGenerationTime(new Date());
     

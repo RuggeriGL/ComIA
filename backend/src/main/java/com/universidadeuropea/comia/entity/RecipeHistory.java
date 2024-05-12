@@ -2,6 +2,8 @@ package com.universidadeuropea.comia.entity;
 
 import java.util.Date;
 
+import com.universidadeuropea.comia.utils.JsonUtil;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -52,4 +54,47 @@ public class RecipeHistory {
 
     @Column(name = "results")
     private Integer results; 
+
+    public void setCuisine(String[] cuisine) {
+        this.cuisine = JsonUtil.toJsonString(cuisine);
+    }
+
+    public String[] getCuisine() {
+        return JsonUtil.fromJsonString(cuisine);
+    }
+
+    public void setExcludeCuisine(String[] excludeCuisine) {
+        this.excludeCuisine = JsonUtil.toJsonString(excludeCuisine);
+    }
+
+    public String[] getExcludeCuisine() {
+        return JsonUtil.fromJsonString(excludeCuisine);
+    }
+
+    public void setDiet(String[] diet) {
+        this.diet = JsonUtil.toJsonString(diet);
+    }
+
+    public String[] getDiets() {
+        return JsonUtil.fromJsonString(diet);
+    }
+
+    public void setIngredients(String[] ingredients) {
+        this.ingredients = JsonUtil.toJsonString(ingredients);
+    }
+
+    public String[] getIngredients() {
+        return JsonUtil.fromJsonString(ingredients);
+    }
+
+    public void setType(String[] type) {
+        this.type = JsonUtil.toJsonString(type);
+    }
+
+    public String[] getType() {
+        return JsonUtil.fromJsonString(type);
+    }
+
+
+
 }

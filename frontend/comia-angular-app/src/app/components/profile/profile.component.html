@@ -1,0 +1,49 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center bg-color-dorado">
+                    <h2>Edit Profile</h2>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstName" [(ngModel)]="profile.firstName"
+                                name="firstName">
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" [(ngModel)]="profile.lastName"
+                                name="lastName">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Intolerances</label>
+                            <ng-select [items]="intolerances" bindLabel="name" bindValue="id"
+                                placeholder="Select intolerances" [(ngModel)]="profile.intolerances" name="intolerances"
+                                [multiple]="true">
+                            </ng-select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Diets</label>
+                            <ng-select [items]="diets" bindLabel="name" bindValue="id" placeholder="Select diets"
+                                [(ngModel)]="profile.diets" name="diets" [multiple]="true">
+                            </ng-select>
+                        </div>
+                        <div class="row text-center mb-4 mt-5">
+                            <div class="col-md-12">
+                                <button type="button" class="btn bg-color-dorado hover-gris save-btn w-25"
+                                    (click)="updateProfile()">Save</button>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-md-12 justify-content-center d-flex">
+                                <div class="alert alert-success text-center w-25">Profile updated</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

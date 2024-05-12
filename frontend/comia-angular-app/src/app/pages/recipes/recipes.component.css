@@ -32,3 +32,13 @@
     font-size: 0.7rem;
 }
 
+.sort-pressed {
+    color: black
+}
+
+@media (min-width: 1200px) {
+    .custom-margin {
+        margin-right: 1rem;
+        margin-left: 1rem;
+    }
+}

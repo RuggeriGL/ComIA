@@ -11,6 +11,7 @@ import { loginGuardGuard } from './guards/login-guard.guard';
 import { RecipesComponent } from './pages/recipes/recipes.component';
 import { VirtualFridgeComponent } from './pages/virtual-fridge/virtual-fridge.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'welcome', component:WelcomeComponent, canActivate: [authGuardGuard]},
   {path: 'recipes', component:RecipesComponent},
   {path: 'vfridge', component: VirtualFridgeComponent, canActivate: [authGuardGuard]},
+  {path: 'profile', component: ProfileComponent, canActivate: [authGuardGuard]},
   {path: 'about', component: AboutComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'home', component: HomeComponent },
