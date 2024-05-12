@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.universidadeuropea.comia.config.UserAuthProvider;
 import com.universidadeuropea.comia.dto.CredentialsDto;
+import com.universidadeuropea.comia.dto.ProfileDto;
 import com.universidadeuropea.comia.dto.SignUpDto;
 import com.universidadeuropea.comia.dto.UserDto;
 import com.universidadeuropea.comia.entity.Usuario;
@@ -53,4 +54,6 @@ public class AuthController {
         }
         return ResponseEntity.badRequest().body(userDto);
     }
+
+    
 }

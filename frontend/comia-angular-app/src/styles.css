@@ -63,22 +63,3 @@ html, body {
     background-color: gray;
 }
 
-.sort-pressed {
-    color: black
-}
-
-.recipe-dietary .dietary-item{
-    font-size: 0.2rem;
-    font-weight: bold;
-}
-
-.recipe-dietary i{
-    font-size: 0.8rem;
-}
-
-@media (min-width: 1200px) {
-    .custom-margin {
-        margin-right: 1rem;
-        margin-left: 1rem;
-    }
-}

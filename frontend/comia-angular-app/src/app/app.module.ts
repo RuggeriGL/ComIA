@@ -19,6 +19,7 @@ import { RecipesComponent } from './pages/recipes/recipes.component';
 import { NgSelectComponent, NgSelectModule } from '@ng-select/ng-select';
 import { VirtualFridgeComponent } from './pages/virtual-fridge/virtual-fridge.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { HomeComponent } from './pages/home/home.component';
     RecipesComponent,
     VirtualFridgeComponent,
     HomeComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -34,9 +34,10 @@
                   <i *ngIf="isLoggedIn" [ngClass]="classUserIcon"></i>
               </button>
               <ul class="dropdown-menu dropdown-menu-end bg-dark mr-2" aria-labelledby="dropdownMenuButton">
-                <li><a *ngIf="!isLoggedIn" class="nav-link" routerLink="/login">Iniciar Sesión</a></li>
-                <li><a *ngIf="!isLoggedIn" class="nav-link" routerLink="/register">Registrarse</a></li>
-                <li><a *ngIf="isLoggedIn" class="nav-link" (click)="logout()">Cerrar Sesión <i class="fa-solid fa-sign-out"></i></a></li>
+                <li><a *ngIf="!isLoggedIn" class="nav-link" routerLink="/login">Log in</a></li>
+                <li><a *ngIf="!isLoggedIn" class="nav-link" routerLink="/register">Register</a></li>
+                <li><a *ngIf="isLoggedIn" class="nav-link" routerLink="/profile">Profile</a></li>
+                <li><a *ngIf="isLoggedIn" class="nav-link" (click)="logout()">Log out <i class="fa-solid fa-sign-out"></i></a></li>
               </ul>
             </div>
           </ul>
