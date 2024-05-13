@@ -64,6 +64,7 @@ html, body {
 }
 
 body {
+    height: 100vh;
     margin: 0;
     position: relative;
     z-index: 0;
@@ -72,12 +73,16 @@ body {
 body::before {
     content: '';
     position: absolute;
-    background-attachment: fixed;
-    background-position: center center;
-    display: flex;
-    height: 100vh; 
-    background: url('../../comia-angular-app/src/assets/images/com-bg.webp')no-repeat center center fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('../../comia-angular-app/src/assets/images/com-bg.webp') no-repeat center center fixed;
     background-size: cover; /* Asegura que el fondo cubra el área completa */
+    filter: blur(8px); /* Ajusta el valor del desenfoque según necesites */
+    opacity: 0.5; /* Ajusta este valor entre 0 y 1 */
+    z-index: -1;
 }
+
 
 

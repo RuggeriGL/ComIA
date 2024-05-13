@@ -53,6 +53,7 @@
             <ng-select [multiple]="true" [items]="diets" [(ngModel)]="recipeSearchCriteria.diet" placeholder="Select diets"
               bindLabel="name" bindValue="id">
               <ng-template ng-header-tmp>
+                <button (click)="selectCustomDiets()" class="btn btn-sm btn-secondary">My settings</button>
                 <button (click)="selectAllDiets()" class="btn btn-sm btn-secondary">Select all</button>
                 <button (click)="unselectAllDiets()" class="btn btn-sm btn-secondary">Unselect all</button>
               </ng-template>
@@ -67,6 +68,7 @@
             <ng-select [multiple]="true" [items]="intolerances" [(ngModel)]="recipeSearchCriteria.intolerances"
               placeholder="Select intolerances" bindLabel="name" bindValue="id">
               <ng-template ng-header-tmp>
+                <button (click)="selectCustomIntolerances()" class="btn btn-sm btn-secondary">My settings</button>
                 <button (click)="selectAllIntolerances()" class="btn btn-sm btn-secondary">Select all</button>
                 <button (click)="unselectAllIntolerances()" class="btn btn-sm btn-secondary">Unselect all</button>
               </ng-template>

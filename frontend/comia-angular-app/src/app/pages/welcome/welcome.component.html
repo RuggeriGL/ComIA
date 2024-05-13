@@ -3,18 +3,39 @@
         <div class="row text-center">
             <h1 class="display 4 color-dorado">Bienvenido a ComIA</h1>
         </div>
-        <div class="row mt-2">
-            <div class="welcome-link">
-                <h3>Prueba tu nevera virtual</h3>
-                <p>Agrega ingradientes a tu nevera virtual y busca recetas rapidamente con ingredientes que tengas en casa</p>
+        <div class="row mt-2 justify-content-center d-flex">
+            <div class="welcome-link col-md-6 p-4">
+                <div class="title text-center mb-2">
+                    <h3>Prueba tu nevera virtual</h3>
+                </div>
+                <div class="text-center">
+                    <p>Agrega ingradientes a tu nevera virtual y busca recetas rapidamente con ingredientes que tengas en
+                        casa</p>
+                </div>
+            </div>
+            <div class="welcome-link col-md-6 p-4">
+                <div class="title text-center mb-2">
+                    <h3>Busca recetas</h3>
+                </div>
+                <div class="justify-content-center d-flex">
+                    <ul>
+                        <li>Busca recetas por ingredientes</li>
+                        <li>Busca recetas por cocina</li>
+                        <li>Busca recetas por dietas</li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="row mt-2">
-            <div class="welcome-link">
-                <h3>Busca recetas</h3>
-                <p>Busca recetas por ingredientes</p>
-                <p>Busca recetas por nutrientes</p>
-                <p>Busca recetas por dietas</p>
+        <div class="row mt-2 justify-content-center d-flex">
+            <div class="col-md-6 p-4">
+                <div class="align-self-end justify-content-center d-flex my-auto">
+                    <a type="button" routerLink="/recipes" class="btn btn-secondary bg-color-dorado hover-gris w-50">Recetas</a>
+                </div>
+            </div>
+            <div class="col-md-6 p-4">
+                <div class="align-self-end justify-content-center d-flex my-auto">
+                    <a type="button" routerLink="/vfridge" class="btn btn-secondary bg-color-dorado hover-gris w-50">Nevera Virtual</a>
+                </div>
             </div>
         </div>
     </div>

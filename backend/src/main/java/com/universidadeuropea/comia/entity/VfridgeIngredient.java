@@ -1,6 +1,5 @@
 package com.universidadeuropea.comia.entity;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,33 +21,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "usuarios")
-public class Usuario {
+@Table(name = "ingredients")
+public class VfridgeIngredient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = true, name = "first_name")
-    private String firstName;
+    @Column
+    private String name;
 
-    @Column(nullable = true, name = "last_name")
-    private String lastName;
-
-    @Column(nullable = false, name = "password")
-    private String password;
-
-    @Column(nullable = false)
-    private String email;
-
-    @Column(nullable = true)
-    private Boolean enabled;
-
-    @Column(name = "fecha_creacion")
-    private Date fechaCreacion;
-
-    @Column(name = "fecha_baja")
-    private Date fechaBaja;
-
+    @Column
+    private String image;
 
 }

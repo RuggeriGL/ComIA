@@ -3,6 +3,8 @@ import { AxiosService } from '../../services/axios.service';
 import { Recipe } from '../../model/Recipe';
 import { RecipeSearchCriteria } from '../../model/RecipeSearchCriteria';
 import { Results } from '../../model/Results';
+import { UserService } from '../../services/user.service';
+import { Profile } from '../../model/Profile';
 
 @Component({
   selector: 'app-recipes',
@@ -10,9 +12,14 @@ import { Results } from '../../model/Results';
   styleUrl: './recipes.component.css'
 })
 export class RecipesComponent implements OnInit {
-
-
-
+  
+  constructor ( private axiosService : AxiosService , private userService : UserService) {}
+  
+  ngOnInit(): void {
+    //this.getRandomRecipes();
+    this.getTestRecipes()
+  }
+  
   query: string | undefined;
   recipes: Recipe[] = [];
   results: Results[] = [];
@@ -26,6 +33,7 @@ export class RecipesComponent implements OnInit {
   sortDirection: string | undefined;
   classSortAsc: string | undefined;
   classSortDesc: string | undefined;
+  profile : Profile | undefined;
 
 
   mealTypes: any[] = [
@@ -161,12 +169,6 @@ export class RecipesComponent implements OnInit {
   ];
 
 
-  constructor ( private axiosService : AxiosService ) {}
-
-  ngOnInit(): void {
-    //this.getRandomRecipes();
-    this.getTestRecipes()
-  }
 
   complexSearch() {
     if (this.query && this.query!==''){
@@ -292,6 +294,32 @@ export class RecipesComponent implements OnInit {
       this.classSortAsc = "";
       this.classSortDesc = "";
     }
+  }
+
+  selectCustomDiets() {
+
+    this.userService.getProfile().then(
+      (profile) => {
+        this.profile=profile;
+        if(this.profile){
+          this.recipeSearchCriteria.diet=this.profile.diets;
+        }
+      }
+    )
+
+  }
+    
+  selectCustomIntolerances() {
+
+    this.userService.getProfile().then(
+      (profile) => {
+        this.profile=profile;
+        if(this.profile){
+          this.recipeSearchCriteria.intolerances=this.profile.intolerances;    
+        }
+      }
+    )
+    
   }
 
 
