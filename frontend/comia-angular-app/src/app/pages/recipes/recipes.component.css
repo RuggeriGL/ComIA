@@ -29,7 +29,8 @@
 }
 
 .dietary-item {
-    font-size: 0.7rem;
+    font-size: 0.5rem;
+    font-weight: 100;
 }
 
 .sort-pressed {

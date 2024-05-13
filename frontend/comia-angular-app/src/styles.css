@@ -63,3 +63,21 @@ html, body {
     background-color: gray;
 }
 
+body {
+    margin: 0;
+    position: relative;
+    z-index: 0;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    background-attachment: fixed;
+    background-position: center center;
+    display: flex;
+    height: 100vh; 
+    background: url('../../comia-angular-app/src/assets/images/com-bg.webp')no-repeat center center fixed;
+    background-size: cover; /* Asegura que el fondo cubra el área completa */
+}
+
+

@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit{
     firstName: ''
   };
 
-
+  updated: boolean = false;
 
   constructor( private axiosService : AxiosService ){}
 
@@ -67,6 +67,9 @@ export class ProfileComponent implements OnInit{
   updateProfile(): void {
     console.log("Updating profile")
     this.axiosService.request("POST" , "/saveProfile" , this.profile).then(response =>{
+      if (response.status==200){
+        this.updated=true;
+      }
       this.getProfile();
       console.log(response);
     });

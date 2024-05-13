@@ -1,0 +1,67 @@
+.home-body {
+    background-image: url('../../../assets/images/cocina.webp');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center center;
+    height: 100vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10;
+    color: #242424; /* Color gris para todo el texto */
+}
+
+.container {
+    width: 100%; /* Ajusta según necesites */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra de texto para mejorar la legibilidad */
+}
+
+h1 {
+    font-size: 3rem; /* Tamaño aún más grande para el título principal */
+    font-weight: 700; /* Hace el texto más grueso */
+    margin: 0.5em 0; /* Reduce el espacio vertical para un mejor ajuste */
+}
+
+h2 {
+    font-size: 2.5rem; /* Tamaño más grande para el subtítulo */
+    font-weight: 500; /* Peso moderado para el texto */
+    margin: 0.4em 0; /* Ajuste de espacio */
+}
+
+h3 {
+    font-size: 2rem; /* Tamaño más grande para la leyenda */
+    font-weight: 400; /* Peso ligero para la leyenda */
+}
+
+img {
+    width: 100px; /* Tamaño de la imagen */
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translate(0%, 0%);
+        animation-timing-function: cubic-bezier(.8,-0.5,.2,1.5);
+    }
+    25% {
+        transform: translate(25vw, -50vh);
+        animation-timing-function: cubic-bezier(.8,-0.5,.2,1.5);
+    }
+    50% {
+        transform: translate(50vw, 0vh);
+        animation-timing-function: cubic-bezier(.8,-0.5,.2,1.5);
+    }
+    75% {
+        transform: translate(75vw, 50vh);
+        animation-timing-function: cubic-bezier(.8,-0.5,.2,1.5);
+    }
+}
+
+#cuchara {
+    position: fixed;
+    bottom: 10%; /* Posición inicial en la parte inferior de la pantalla */
+    left: 10%; /* Posición inicial en el lado izquierdo de la pantalla */
+    width: 100px; /* Ajusta el tamaño según necesites */
+    animation: bounce 10s infinite; /* Ajusta la duración y otros parámetros según necesites */
+    z-index: 1000; /* Asegúrate de que la cuchara esté por encima de otros elementos */
+}
+
