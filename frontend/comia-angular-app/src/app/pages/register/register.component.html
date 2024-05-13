@@ -1,49 +1,49 @@
-<div id="registerBody">
+<div id="registerBody com-bg">
     <div class="container-fluid justify-content-center d-flex w-75 ">
         <div class="col-md-3">
             <form (ngSubmit)="onSubmitRegister()" [formGroup]="registerForm">
-                <h2 class="text-center" style="margin: 30px;">Registrarse</h2>
+                <h2 class="text-center" style="margin: 30px;">Register</h2>
                 <div class="form-outline mb-3">
-                    <label class="form-label" for="firstName">Nombre</label>
+                    <label class="form-label" for="firstName">Fist Name</label>
                     <input class="form-control" type="text" id="firstName" name="firstName" formControlName="firstName" required>
                     <div *ngIf="registerForm.get('firstName')?.touched && registerForm.get('firstName')?.errors?.['required']">
-                        <div style="font-size: 0.9rem ; color:  rgb(142, 3, 3);">* Nombre requerido</div>
+                        <div style="font-size: 0.9rem ; color:  rgb(142, 3, 3);">* Name required</div>
                     </div>
                 </div>
                 <div class="form-outline mb-3">
-                    <label class="form-label" for="lastName">Apellido</label>
+                    <label class="form-label" for="lastName">Last Name</label>
                     <input class="form-control" type="text" id="lastName" name="lastName" formControlName="lastName">
                 </div>
                 <div class="form-outline mb-3">
-                    <label class="form-label" for="email">Correo Electrónico</label>
+                    <label class="form-label" for="email">Email</label>
                     <input class="form-control" type="email" id="email" name="email" formControlName="email" required>
                     <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['required']">
-                        <div style="font-size: 0.9rem ; color:  rgb(142, 3, 3);">* Email requerido</div>
+                        <div style="font-size: 0.9rem ; color:  rgb(142, 3, 3);">* Email required</div>
                     </div>
                     <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['email']">
-                        <div style="font-size: 0.9rem ; color:  rgb(142, 3, 3);">El email no es válido.</div>
+                        <div style="font-size: 0.9rem ; color:  rgb(142, 3, 3);">Email is not valid.</div>
                     </div>
                 </div>
                 <div class="form-outline mb-3">
-                    <label class="form-label" for="registerPassword">Contraseña</label>
+                    <label class="form-label" for="registerPassword">Password</label>
                     <input class="form-control" type="password" id="registerPassword" name="password"
                         formControlName="password" required>
                     <div *ngIf="registerForm.get('password')?.touched">
                         <div *ngIf="registerForm.get('password')?.errors?.['required']" style="font-size: 0.9rem ; color:  rgb(142, 3, 3);">* Debe proporcionar una contraseña</div>
-                        <div *ngIf="registerForm.get('password')?.errors?.['minlength']" style="font-size: 0.9rem ; color:  rgb(142, 3, 3);">* Contraseña debe tener al menos 6 caracteres</div>
+                        <div *ngIf="registerForm.get('password')?.errors?.['minlength']" style="font-size: 0.9rem ; color:  rgb(142, 3, 3);">* Password must contain at least 6 characters</div>
                     </div>
                 </div>
                 <div class="form-outline mb-3">
-                    <label class="form-label" for="confirmPassword">Confirmar Contraseña</label>
+                    <label class="form-label" for="confirmPassword">Confirm Password</label>
                     <input class="form-control" type="password" id="confirmPassword" name="confirmPassword"
                         formControlName="confirmPassword" required>
                     <div *ngIf="registerForm.get('password')?.touched">
-                        <div *ngIf="registerForm.get('confirmPassword')?.errors?.['mismatch'] && !registerForm.get('password')?.errors?.['minlength'] && !registerForm.get('password')?.errors?.['required']" style="font-size: 0.9rem ; color:  rgb(142, 3, 3);">Las contraseñas no coinciden</div>
+                        <div *ngIf="registerForm.get('confirmPassword')?.errors?.['mismatch'] && !registerForm.get('password')?.errors?.['minlength'] && !registerForm.get('password')?.errors?.['required']" style="font-size: 0.9rem ; color:  rgb(142, 3, 3);">Passwords doesn't match.</div>
                     </div>
                 </div>
                 <div class="container-fluid d-flex justify-content-center">
                     <button class="btn btn-block mb-4 btn-form-login px-4 py-2 mt-4" [disabled]="!registerForm.valid"
-                    type="submit"> Registrarse </button>
+                    type="submit"> Register </button>
                 </div>
                 <div *ngIf="httpMessage?.status===400" class="alert alert-danger text-center">{{ httpMessage?.message }}</div>
                 <div *ngIf="httpMessage?.status===201" class="alert alert-success text-center">{{ httpMessage?.message+" " }}<a href="/login">iniciar sesión</a></div>

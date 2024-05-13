@@ -9,12 +9,32 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.http.client.utils.URIBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.universidadeuropea.comia.dto.ProfileDto;
+import com.universidadeuropea.comia.dto.UserDto;
+import com.universidadeuropea.comia.entity.Profiles;
+import com.universidadeuropea.comia.entity.UserIngredient;
+import com.universidadeuropea.comia.entity.Usuario;
+import com.universidadeuropea.comia.entity.VfridgeIngredient;
+import com.universidadeuropea.comia.exceptions.AppException;
+import com.universidadeuropea.comia.model.Ingredient;
 import com.universidadeuropea.comia.model.RecipeSearchCriteria;
+import com.universidadeuropea.comia.repository.VfridgeIngredientRepository;
+
+import jakarta.transaction.Transactional;
+
+import com.universidadeuropea.comia.repository.UserIngredientRepository;
+import com.universidadeuropea.comia.repository.UsuarioRepository;
 
 @Service
 public class RecipesService {
@@ -24,6 +44,14 @@ public class RecipesService {
 
     @Value("${spoonacular.api.base.path}")
     private String basePath;
+
+    @Autowired
+    private VfridgeIngredientRepository vfridgeIngredientRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired UserIngredientRepository userIngredientRepository;
 
     public String getRecipes() throws IOException, InterruptedException, URISyntaxException {
         HttpClient client = HttpClient.newHttpClient();
@@ -387,5 +415,33 @@ public class RecipesService {
             throw new RuntimeException("Failed to fetch data from API: " + response.statusCode());
         }
     }
+
+    
+    public void updateUserIngredients(Long userId, Set<VfridgeIngredient> newIngredients) {
+        Usuario usuario = usuarioRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        System.out.println(usuario.toString());
+        System.out.println(newIngredients.toString());
+        
+        userIngredientRepository.deleteByUserId(userId);
+
+        for (VfridgeIngredient ingredient : newIngredients) {
+            UserIngredient newUserIngredient = new UserIngredient();
+            newUserIngredient.setId(null);
+            newUserIngredient.setUserId(usuario.getId());
+            newUserIngredient.setIngredientId(ingredient.getId());
+            userIngredientRepository.save(newUserIngredient);
+        }
+    }
+
+    public VfridgeIngredient[] getUserIngredients(Long userId) {
+        Usuario usuario = usuarioRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return userIngredientRepository.findByUserId(usuario.getId());
+    }
+
+    
     
 }

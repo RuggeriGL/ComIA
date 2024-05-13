@@ -6,3 +6,11 @@
 h1 {
     text-shadow: 1rem;
 }
+
+a.btn {
+    text-decoration: none; /* Elimina el subrayado */
+    color: white; /* Mantiene el color del texto igual al del contexto */
+    display: inline-block;
+    font-weight: 600;
+    text-shadow: 1rem;
+}

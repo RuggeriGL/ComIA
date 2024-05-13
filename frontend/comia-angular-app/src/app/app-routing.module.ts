@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AboutComponent } from './pages/about/about.component';
-import { ContactComponent } from './pages/contact/contact.component';
 import { ForbiddenErrorComponent } from './components/errors/forbidden-error/forbidden-error.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { authGuardGuard } from './guards/auth-guard.guard';
@@ -23,7 +22,6 @@ const routes: Routes = [
   {path: 'vfridge', component: VirtualFridgeComponent, canActivate: [authGuardGuard]},
   {path: 'profile', component: ProfileComponent, canActivate: [authGuardGuard]},
   {path: 'about', component: AboutComponent},
-  {path: 'contact', component: ContactComponent},
   {path: 'home', component: HomeComponent },
   {path: '403', component: ForbiddenErrorComponent}
 
