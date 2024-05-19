@@ -20,6 +20,7 @@ import { VirtualFridgeComponent } from './pages/virtual-fridge/virtual-fridge.co
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     RecipesComponent,
     VirtualFridgeComponent,
     HomeComponent,
-    ProfileComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

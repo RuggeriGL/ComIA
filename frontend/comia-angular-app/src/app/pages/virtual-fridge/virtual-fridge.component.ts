@@ -11,7 +11,8 @@ export class VirtualFridgeComponent implements OnInit {
 
   searchText: string = '';
   updated: boolean = false; 
-
+  
+  /*
   ingredients : Ingredient[] = [
     { name : "Chicken breasts" , image:"Chicken_breasts.webp"},
     { name : "Salmon" , image:"Salmon.webp"},
@@ -38,13 +39,16 @@ export class VirtualFridgeComponent implements OnInit {
     { name : "Cheese" , image:"Cheese.webp"},
     { name : "Mozzarella" , image:"Mozzarella.webp"},
     { name : "Beans " , image:"Beans.webp"}
-  ]
+  ]*/
 
+  ingredients : Ingredient[] = [];
   selectedIngredients: Ingredient[] = [];
 
   constructor( private recipesService : RecipesService ) {}
+
   ngOnInit(): void {
-    this.getIngredients();
+    this.getUserIngredients();
+    this.getAllIngredients();
   }
 
   get filteredIngredients(): Ingredient[] {
@@ -53,37 +57,39 @@ export class VirtualFridgeComponent implements OnInit {
   }
 
   toggleIngredientSelection(ingredient: Ingredient): void {
-    const index = this.selectedIngredients.indexOf(ingredient);
+    const index = this.selectedIngredients.findIndex(selected => selected.id === ingredient.id);
     if (index >= 0) {
-      this.selectedIngredients.splice(index, 1);  // Remove if already added
+      this.selectedIngredients.splice(index, 1);
     } else {
-      this.selectedIngredients.push(ingredient);  // Add if not already added
+      this.selectedIngredients.push(ingredient);
     }
   }
-  
 
   isSelected(ingredient: Ingredient): boolean {
-    return this.selectedIngredients.includes(ingredient);
+    return this.selectedIngredients.some(selected => selected.id === ingredient.id);
   }
   
-  saveSelectedIngredients(): void {/*
+  saveSelectedIngredients(): void {
     this.recipesService.saveIngredients(this.selectedIngredients).then(response =>{
       //mansaje
       console.log(response);
     });
-    */
   }
 
-  getIngredients(){
-    /*
-    this.recipesService.getIngredients().then(response =>{
+  getAllIngredients(){
+    this.recipesService.getAllIngredients().then(response =>{
+      this.ingredients = response;
+      console.log(response);
+    });
+  }
+
+  getUserIngredients(){
+    this.recipesService.getUserIngredients().then(response =>{
       this.selectedIngredients = response;
       console.log(response);
     });
-    */
+
+    
   }
-
-
-  
 
 }

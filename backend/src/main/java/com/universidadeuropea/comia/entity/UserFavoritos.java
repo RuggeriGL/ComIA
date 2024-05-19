@@ -1,18 +1,10 @@
 package com.universidadeuropea.comia.entity;
 
-import java.io.Serializable;
-
-import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
-import jakarta.persistence.NamedNativeQueries;
-import jakarta.persistence.NamedNativeQuery;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,11 +16,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "useringredients")
+@Table(name = "user_favoritos")
 @Entity
-public class UserIngredient {
+public class UserFavoritos {
     @EmbeddedId
-    private UserIngredientId id;
+    private UserFavoritoId id;
 
     @ManyToOne
     @MapsId("userId")
@@ -36,9 +28,9 @@ public class UserIngredient {
     private Usuario usuario;
 
     @ManyToOne
-    @MapsId("ingredientId")
-    @JoinColumn(name = "ingredient_id")
-    private VfridgeIngredient ingrediente;
+    @MapsId("favoritoId")
+    @JoinColumn(name = "favorito_id")
+    private Favoritos favorito;
 
 }
 

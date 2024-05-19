@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -50,5 +50,10 @@ public class Usuario {
     @Column(name = "fecha_baja")
     private Date fechaBaja;
 
+    @OneToMany(mappedBy = "usuario")
+    private Set<UserIngredient> userIngredients = new HashSet<>();
+
+    @OneToMany(mappedBy = "usuario")
+    private Set<UserFavoritos> userFavoritos = new HashSet<>();
 
 }
