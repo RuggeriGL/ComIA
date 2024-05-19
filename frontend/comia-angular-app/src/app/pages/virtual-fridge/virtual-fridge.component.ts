@@ -87,7 +87,7 @@ export class VirtualFridgeComponent implements OnInit {
     this.recipesService.getUserIngredients().then(response =>{
       this.selectedIngredients = response;
       console.log(response);
-    });
+  });
 
     
   }

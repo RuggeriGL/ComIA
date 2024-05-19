@@ -6,6 +6,7 @@ import { Results } from '../../model/Results';
 import { UserService } from '../../services/user.service';
 import { Profile } from '../../model/Profile';
 import { RecipesService } from '../../services/recipes.service';
+import { Ingredient } from '../../model/Ingredient';
 
 @Component({
   selector: 'app-recipes',
@@ -14,12 +15,14 @@ import { RecipesService } from '../../services/recipes.service';
 })
 export class RecipesComponent implements OnInit {
 
+
   
   constructor ( private axiosService : AxiosService , private userService : UserService, private recipeService : RecipesService ) {}
   
   ngOnInit(): void {
     //this.getRandomRecipes();
-    this.getTestRecipes()
+    this.getTestRecipes();
+    this.getAllIngredients();
   }
   
   query: string | undefined;
@@ -28,6 +31,7 @@ export class RecipesComponent implements OnInit {
   results: Results[] = [];
   recipeSearchCriteria: RecipeSearchCriteria = {};
 
+  ingredients : Ingredient[] = [];
   selectedMealTypes : string[] = [];
   selectedIntolerances : string[] = [];
   selectedDiets : string[] = [];
@@ -258,6 +262,12 @@ export class RecipesComponent implements OnInit {
   unselectAllExcludeCuisines() {
     this.recipeSearchCriteria.excludeCuisine = [];
   }
+  unselectAllIngredients() {
+    this.recipeSearchCriteria.includeIngredients=[]
+  }
+  selectAllIngredients() {
+    this.recipeSearchCriteria.includeIngredients = this.ingredients.map(x => x.name);
+  }
 
 
 
@@ -326,7 +336,7 @@ export class RecipesComponent implements OnInit {
   }
 
   toggleFavorites(recipe: Recipe) {
-    const index = this.favorites.findIndex(selected => selected.id === recipe.id);
+    const index = this.favorites.findIndex(selected => selected.id == recipe.id);
     if (index >= 0) {
       this.favorites.splice(index, 1);
       this.recipeService.removeFavorite(recipe);
@@ -349,11 +359,25 @@ export class RecipesComponent implements OnInit {
     this.recipeService.getMyFavorites().then(response =>{
       this.recipes=response;
       // Anadimos las recetas obtenidas a la lista de recetas favoritas
-      response.forEach(favRecipe =>{
+      /*response.forEach(favRecipe =>{
         this.toggleFavorites(favRecipe);
       })
+      */
     })
   }
 
+  getAllIngredients(){
+    this.recipeService.getAllIngredients().then(response =>{
+      this.ingredients = response;
+      //console.log(response);
+    });
+  }
+
+  getUserIngredients(){
+    this.recipeService.getUserIngredients().then(response =>{
+      this.recipeSearchCriteria.includeIngredients = response.map(x => x.name);
+      //console.log(response);
+    });
+  }
 
 }

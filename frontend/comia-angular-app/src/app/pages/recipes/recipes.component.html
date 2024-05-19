@@ -93,13 +93,13 @@
           </div>
           <!--Meal Ingredients-->
           <div class="mt-2">
-            <label for="intolerances">Ingredients</label>
-            <ng-select (change)="complexSearch()" [multiple]="true" [items]="mealTypes" [(ngModel)]="recipeSearchCriteria.type"
-              placeholder="Select intolerances" bindLabel="name" bindValue="id">
+            <label for="ingredients">Ingredients</label>
+            <ng-select (change)="complexSearch()" [multiple]="true" [items]="ingredients" [(ngModel)]="recipeSearchCriteria.includeIngredients"
+              placeholder="Select ingredients" bindLabel="name" bindValue="name">
               <ng-template ng-header-tmp>
-                <button (click)="selectCustomIntolerances()" class="btn btn-sm btn-secondary">My Fridge</button>
-                <button (click)="selectAllMealTypes()" class="btn btn-sm btn-secondary">Select all</button>
-                <button (click)="unselectAllMealTypes()" class="btn btn-sm btn-secondary">Unselect all</button>
+                <button (click)="getUserIngredients()" class="btn btn-sm btn-secondary">My Fridge</button>
+                <button (click)="selectAllIngredients()" class="btn btn-sm btn-secondary">Select all</button>
+                <button (click)="unselectAllIngredients()" class="btn btn-sm btn-secondary">Unselect all</button>
               </ng-template>
               <ng-template ng-footer-tmp>
                 Selected count: {{selectedMealTypes.length}}
@@ -196,10 +196,16 @@
               <p class="card-text" [innerHTML]="recipe.summary.length > 150 ? (recipe.summary | slice:0:150) + '...' : recipe.summary"></p>
               <a [href]="recipe.sourceUrl" class="btn bg-color-dorado" style="font-weight: 600;">See more</a>
               <button title="Add this to favorites" class="btn mt-2 btn-favorite-card" (click)="toggleFavorites(recipe)">
-                <i class="fa fa-star" [ngStyle]="{
-                  'font-size': '1.5rem', 
-                  'color': isSelected(recipe) ? 'rgb(219, 178, 57)' : 'rgb(130, 30, 30)'
-                }"></i>
+                <i 
+                  [ngClass]="{
+                    'fa-regular': !isSelected(recipe), 
+                    'fa-solid': isSelected(recipe), 
+                    'fa-star':true}" 
+                  [ngStyle]="{
+                    'font-size': '1.5rem', 
+                    'color': isSelected(recipe) ? 'rgb(219, 178, 57)' : 'rgb(130, 30, 30)'}"
+                >
+                </i>
               </button>
             </div>
           </div>
