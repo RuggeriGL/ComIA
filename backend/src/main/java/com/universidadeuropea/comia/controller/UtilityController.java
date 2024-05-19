@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.universidadeuropea.comia.dto.ProfileDto;
 import com.universidadeuropea.comia.dto.UserDto;
+import com.universidadeuropea.comia.entity.Favoritos;
 import com.universidadeuropea.comia.entity.VfridgeIngredient;
 import com.universidadeuropea.comia.service.RecipesService;
 import com.universidadeuropea.comia.service.UserService;
@@ -52,16 +53,23 @@ public class UtilityController {
     
     
     @GetMapping("/getIngredientsByUser")
-    public ResponseEntity<VfridgeIngredient[]> getUserIngredients() {
+    public ResponseEntity<Set<VfridgeIngredient>> getUserIngredients() {
         UserDto userDto = userService.whoami();
         System.out.println("Getting ingredients");
         
         if(userDto!=null && userDto.getId()!=null){
-            VfridgeIngredient[] ingredients = recipesService.getUserIngredients(userDto.getId());
+            Set<VfridgeIngredient> ingredients = recipesService.getSelectedIngredients(userDto.getId());
             System.out.println(ingredients.toString());
             return ResponseEntity.ok(ingredients);
         }
         return null;
+    }
+    
+    @GetMapping("/getAllIngredients")
+    public ResponseEntity<Set<VfridgeIngredient>> getALLIngredients() {
+        System.out.println("Getting all ingredients");
+
+        return ResponseEntity.ok(recipesService.getAllIngredients());
     }
 
     @PostMapping("/updateIngredients")
@@ -72,6 +80,43 @@ public class UtilityController {
         if(userDto!=null && userDto.getId()!=null){
             recipesService.updateUserIngredients(userDto.getId(), ingredients);
             return ResponseEntity.ok().build();
+        }
+        return null;
+    }
+
+    @PostMapping("/addFavorite")
+    public ResponseEntity<Void> addFavorite(@RequestBody Favoritos favorito) {
+        UserDto userDto = userService.whoami();
+        System.out.println(favorito.toString());
+        
+        if(userDto!=null && userDto.getId()!=null){
+            recipesService.addFavorite(userDto.getId(), favorito);
+            return ResponseEntity.ok().build();
+        }
+        return null;
+    }
+
+    @PostMapping("/removeFavorite")
+    public ResponseEntity<Void> removeFavorite(@RequestBody Favoritos favorito) {
+        UserDto userDto = userService.whoami();
+        System.out.println(favorito.toString());
+        
+        if(userDto!=null && userDto.getId()!=null){
+            recipesService.removeFavorite(userDto.getId(), favorito);
+            return ResponseEntity.ok().build();
+        }
+        return null;
+    }
+
+    @GetMapping("/getMyFavorites")
+    public ResponseEntity<String> getMyFavorites() {
+        UserDto userDto = userService.whoami();
+        System.out.println("Getting ingredients");
+        
+        if(userDto!=null && userDto.getId()!=null){
+            String favRecipes = recipesService.getMyFavorites(userDto.getId());
+            System.out.println(favRecipes.toString());
+            return ResponseEntity.ok(favRecipes);
         }
         return null;
     }

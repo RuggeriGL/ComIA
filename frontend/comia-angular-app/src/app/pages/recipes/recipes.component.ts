@@ -5,6 +5,7 @@ import { RecipeSearchCriteria } from '../../model/RecipeSearchCriteria';
 import { Results } from '../../model/Results';
 import { UserService } from '../../services/user.service';
 import { Profile } from '../../model/Profile';
+import { RecipesService } from '../../services/recipes.service';
 
 @Component({
   selector: 'app-recipes',
@@ -12,8 +13,9 @@ import { Profile } from '../../model/Profile';
   styleUrl: './recipes.component.css'
 })
 export class RecipesComponent implements OnInit {
+
   
-  constructor ( private axiosService : AxiosService , private userService : UserService) {}
+  constructor ( private axiosService : AxiosService , private userService : UserService, private recipeService : RecipesService ) {}
   
   ngOnInit(): void {
     //this.getRandomRecipes();
@@ -22,6 +24,7 @@ export class RecipesComponent implements OnInit {
   
   query: string | undefined;
   recipes: Recipe[] = [];
+  favorites: Recipe[] = [];
   results: Results[] = [];
   recipeSearchCriteria: RecipeSearchCriteria = {};
 
@@ -320,6 +323,36 @@ export class RecipesComponent implements OnInit {
       }
     )
     
+  }
+
+  toggleFavorites(recipe: Recipe) {
+    const index = this.favorites.findIndex(selected => selected.id === recipe.id);
+    if (index >= 0) {
+      this.favorites.splice(index, 1);
+      this.recipeService.removeFavorite(recipe);
+    } else {
+      this.favorites.push(recipe);
+      this.addFavorite(recipe);
+    }
+  }
+
+  isSelected(recipe: Recipe): boolean {
+    return this.favorites.some(selected => selected.id === recipe.id);
+  }
+
+  addFavorite(recipe : Recipe){
+    this.recipeService.addFavorite(recipe);
+  }
+
+  // Metodo que recibe lista de recetas favoritas y las asigna a la lista de recetas
+  getMyFavorites(): void{
+    this.recipeService.getMyFavorites().then(response =>{
+      this.recipes=response;
+      // Anadimos las recetas obtenidas a la lista de recetas favoritas
+      response.forEach(favRecipe =>{
+        this.toggleFavorites(favRecipe);
+      })
+    })
   }
 
 

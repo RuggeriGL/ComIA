@@ -4,17 +4,18 @@ import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import com.universidadeuropea.comia.entity.UserIngredient;
-import com.universidadeuropea.comia.entity.UserIngredientId;
+
+import com.universidadeuropea.comia.entity.UserFavoritoId;
+import com.universidadeuropea.comia.entity.UserFavoritos;
 
 import jakarta.transaction.Transactional;
 
 
 @Repository
-public interface UserIngredientRepository extends CrudRepository<UserIngredient, UserIngredientId> {
+public interface UserFavoritosRepository extends CrudRepository<UserFavoritos, UserFavoritoId> {
 
 
-    Iterable<UserIngredient> findByUsuarioId(Long userId);
+    Iterable<UserFavoritos> findByUsuarioId(Long userId);
 
     @Modifying
     @Transactional

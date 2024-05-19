@@ -21,5 +21,21 @@ public class JsonUtil {
             throw new RuntimeException("Error al convertir JSON a array", e);
         }
     }
+
+    public static String toJsonString(Object object) {
+        try {
+            return objectMapper.writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Failed to convert object to JSON string", e);
+        }
+    }
+
+    public static <T> T fromJsonString(String jsonString, Class<T> valueType) {
+        try {
+            return objectMapper.readValue(jsonString, valueType);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("Failed to convert JSON string to object", e);
+        }
+    }
 }
 

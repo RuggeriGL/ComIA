@@ -43,3 +43,17 @@
         margin-left: 1rem;
     }
 }
+
+
+.favorite-btn i{
+    color : rgb(219, 178, 57)
+}
+
+.favorite-btn:hover i{
+    /*color:rgb(191, 54, 54);*/
+    color : rgb(131, 107, 35)
+}
+
+.btn-favorite-card:hover i{
+    filter: brightness(1.5);
+}

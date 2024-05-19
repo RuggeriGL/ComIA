@@ -3,6 +3,8 @@ package com.universidadeuropea.comia.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.universidadeuropea.comia.utils.JsonUtil;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,17 +23,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "ingredients")
-public class VfridgeIngredient {
+@Table(name = "favoritos")
+public class Favoritos {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String image;
+    @Column(name = "recipe_json")
+    private String recipeJson;
 
-    @OneToMany(mappedBy = "ingrediente")
-    private Set<UserIngredient> userIngredients = new HashSet<>();
+    @OneToMany(mappedBy = "favorito")
+    private Set<UserFavoritos> userFavoritos = new HashSet<>();
 
+    /* 
+    public void setRecipeJson(String recipeJson) {
+        this.recipeJson = JsonUtil.toJsonString(recipeJson);
+    }
+
+    public String getRecipeJson() {
+        return this.recipeJson;
+    }
+    */
 }
